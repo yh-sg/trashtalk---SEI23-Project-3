@@ -10,6 +10,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       ## Recoverable
       t.string :username, null:false
       t.string :address, null:false
+      t.integer :phone_number, null:false
+
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
 
