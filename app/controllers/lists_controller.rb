@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
   def index
+    @lists = List.all
   end
 
   def new
@@ -18,9 +19,17 @@ class ListsController < ApplicationController
     end 
   end 
 
+  def destroy
+    if List.find(params[:id]).destroy
+      redirect_to root_path
+    end
+  end 
+
   def show
     @list = List.find(params[:id])
   end
+
+
 
   def assign # the collector has clicked to assign this task to themselves
     list = List.find(params[:id])
