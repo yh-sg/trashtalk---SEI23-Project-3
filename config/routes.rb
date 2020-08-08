@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :lists # /list/index 
 
   # for fufillment
+  get "users/:id", to: "users#show", as: :user
   patch "/list/:id/assign", to: "lists#assign", as: :assign_list
   patch "/list/:id/complete", to: "lists#complete", as: :complete_list
 

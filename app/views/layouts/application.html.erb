@@ -20,7 +20,9 @@
         <% else %>
           <%= current_user.role %>
         <% end %>
-        <%= current_user.email %>
+        <%= link_to user_path(current_user.id) do %>
+          <%= current_user.username %>
+        <% end %>
         <%= link_to  "Logout", destroy_user_session_path, method: :delete %>    
       <% else %>
         <%= link_to  "Sign up", new_user_registration_path %>

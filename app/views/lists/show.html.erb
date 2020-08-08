@@ -1,6 +1,10 @@
 <h1>Lists#show</h1>
 
-<p>Belongs to: <%= @list.user.username %></p>
+<p>Belongs to: 
+    <%= link_to user_path(@list.user) do %>
+        <%= @list.user.username %>
+    <% end %>
+</p>
 <p>Pick up address: <%= @list.address %></p>
 <p>These are the items... #do a loop through the items</p>
 
@@ -8,9 +12,15 @@
     <% if @list.status == 0 %>
         This list is open
     <% elsif @list.status == 1 %>
-        This list is assigned
+        This list is assigned to: 
+        <%= link_to user_path(@list.collector) do %>
+            <%= @assigned %>
+        <% end %>
     <% elsif @list.status == 2 %>
-        This list is completed
+        This list is completed by: 
+        <%= link_to user_path(@list.collector) do %>
+            <%= @assigned %>
+        <% end %>
     <% end %>
 </p>
 

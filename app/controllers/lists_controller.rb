@@ -27,9 +27,12 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
+
+    if @list.collector != nil
+      @assigned = User.find(@list.collector).username
+    end 
+    # @assigned = User.find_by(@list.collector) ? "Unassigned" : User.find_by(@list.collector).username
   end
-
-
 
   def assign # the collector has clicked to assign this task to themselves
     list = List.find(params[:id])

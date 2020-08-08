@@ -1,11 +1,7 @@
-<h1>Dashboard</h1>
+<h1>Index</h1>
 
 <% if current_user.role != "user" %>
     <%= link_to "Create new lists", new_list_path %>
-<% end %>
-
-<% if current_user.role != "recycler" %>
-    <%= link_to "Browse lists", lists_path %>
 <% end %>
 
 <% @lists.each do |list| %>
