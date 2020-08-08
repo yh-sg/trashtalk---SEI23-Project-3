@@ -2,7 +2,13 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:index]
 
-  def index
+  def index # landing page when users login, => shows all the lists
+    if (current_user.role === 0) # regular user
+      @lists = List.where(status: 0)
+    else 
+      # if the user is an admin/ regular user, just show all lists
+      @lists = List.all
+    end
   end
 
   def new
