@@ -9,6 +9,7 @@ class TypesController < ApplicationController
   def create
     #@list = List.find(params[:list_id])
     #@type = @list.types.build(type_params)
+    @type = Type.new(type_params)
     if @type.save
       redirect_to types_path
     else
@@ -24,20 +25,24 @@ class TypesController < ApplicationController
   end
 
   def destroy
-    #@type = Type.find(params[:id]).destroy
-    #redirect_to path
+    if @type.destroy
+      redirect_to types_path
+    else
+      render :index
+    end
   end
 
   def update
     #list = List.find(params[:list_id])
     if @type.update(type_params)
-    #redirect_to type_path
+      redirect_to type_path
     else
       render :edit
     end
   end
 
   def edit
+    #@list = List.find(params[:list_id])
   end
 
   private

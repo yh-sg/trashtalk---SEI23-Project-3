@@ -1,0 +1,23 @@
+<%= form_for @type do |f| %>
+
+<div>
+    <h3>Materials</h3>
+    <%= f.radio_button :material, :value => "Metal", :checked => true %>
+    <%= f.label :material, "Metal" %>
+    <%= f.radio_button :material, :value => "Glass", :checked => true %>
+    <%= f.label :material, "Glass" %>
+    <%= f.radio_button :material, :value => "Plastic", :checked => true %>
+    <%= f.label :material, "Plastic" %>
+</div>
+<div>
+    <%= f.label :remarks, "Remarks" %>
+    <%= f.text_field :remarks %>
+</div>
+<div>
+    <%= f.label :weight, "Weight(KG)" %>
+    <%= f.number_field :weight, in: 0.1..10, step: 0.1 %>
+</div>
+
+<%= f.submit "Submit" %>
+<% end %>
+
