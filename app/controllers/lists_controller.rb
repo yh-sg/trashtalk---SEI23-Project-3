@@ -40,10 +40,6 @@ class ListsController < ApplicationController
     end 
   end 
 
-  def parse_comments
-    comments_from_form = params['myform']['comments']
-  end
-
   private
   
   def list_params
