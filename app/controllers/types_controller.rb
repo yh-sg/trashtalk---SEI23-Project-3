@@ -1,4 +1,5 @@
 class TypesController < ApplicationController
+  #before_action :authenticate_user!
   before_action :set_type, only: [:show, :edit, :destroy, :update]
 
   def index
@@ -6,6 +7,13 @@ class TypesController < ApplicationController
   end
 
   def create
+    #@list = List.find(params[:list_id])
+    #@type = @list.types.build(type_params)
+    if @type.save
+      redirect_to types_path
+    else
+      render :new
+    end
   end
 
   def new
