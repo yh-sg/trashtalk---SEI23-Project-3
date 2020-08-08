@@ -15,7 +15,11 @@
   <p class="alert"><%= alert %></p>
 
   <% if user_signed_in? %>
-        <%= current_user.role %>
+        <% if current_user.role === "user"%>
+          collector
+        <% else %>
+          <%= current_user.role %>
+        <% end %>
         <%= current_user.email %>
         <%= link_to  "Logout", destroy_user_session_path, method: :delete %>    
       <% else %>
