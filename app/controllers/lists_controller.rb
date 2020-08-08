@@ -24,7 +24,7 @@ class ListsController < ApplicationController
 
   def assign # the collector has clicked to assign this task to themselves
     list = List.find(params[:id])
-    current_user.lists << list
+    list.collector = current_user.id
     list.update(status: 1) # 0 - unfulfilled, 1 - doing, 2 - done
     if list.save 
       redirect_to root_path

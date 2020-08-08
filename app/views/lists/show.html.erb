@@ -21,7 +21,7 @@
 <% end %>
 
 <%# Admin/ assigned collector %>
-<% if @list.user.id === current_user.id || current_user.role === "admin" %>
+<% if @list.user.id === current_user.id || current_user.role === "admin" || @list.collector === current_user.id %>
     This list belongs to you <%# For now.. We display the same pictures %>
 
     <%# This list belongs to the collector and the list is in progress %>
