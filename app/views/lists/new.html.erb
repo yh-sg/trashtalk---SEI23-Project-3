@@ -9,7 +9,9 @@
 
     <div>
         <%= f.label :pickUpDate %>
-        <%= f.text_field :pickUpDate %>
+        <%= f.text_field :pickUpDate, {"data-provide" => 'datepicker', 
+            "data-date-format" => "yyyy-mm-dd", "data-date-autoclose" => 
+            "true"} %>
     </div>
 
     <div>

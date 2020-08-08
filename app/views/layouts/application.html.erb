@@ -10,16 +10,20 @@
   </head>
 
   <body>
+    <% if notice %>
+      <p class="alert alert-success notice"><%= notice %></p>
+    <% end %>
 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
 
-  <% if user_signed_in? %>
-        <% if current_user.role === "user"%>
-          collector
-        <% else %>
-          <%= current_user.role %>
-        <% end %>
+    <% if user_signed_in? %>
+      <% if current_user.role === "user"%>
+        collector
+      <% else %>
+        <%= current_user.role %>
+      <% end %>
         <%= link_to user_path(current_user.id) do %>
           <%= current_user.username %>
         <% end %>
@@ -27,13 +31,7 @@
       <% else %>
         <%= link_to  "Sign up", new_user_registration_path %>
         <%= link_to  "Sign In", new_user_session_path %>
-  <% end %>
-
-
-
-
-
-
+    <% end %>
     <%= yield %>
   </body>
 </html>
