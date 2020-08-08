@@ -1,5 +1,6 @@
 # Trashtalks
-Project 3
+SEI 23 - Project 3
+by Yonghan, Metilda, Elisa and Amirah
 
 #### [Wireframes](https://github.com/yh-sg/trashtalks/tree/master/wireframes)
 #### [User Stories](https://github.com/yh-sg/trashtalks/blob/master/user-stories.md)
