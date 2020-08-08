@@ -9,9 +9,7 @@
 
     <div>
         <%= f.label :pickUpDate %>
-        <%= f.text_field :pickUpDate, {"data-provide" => 'datepicker', 
-            "data-date-format" => "yyyy-mm-dd", "data-date-autoclose" => 
-            "true"} %>
+        <%= f.text_field :pickUpDate, 'data-behaviour' => 'datepicker' %>
     </div>
 
     <div>
@@ -21,3 +19,7 @@
 
     <div><%= f.submit %></div>
 <% end %>
+
+<script type="text/javascript">
+  $('[data-behaviour~=datepicker]').datepicker();
+</script>
