@@ -7,7 +7,7 @@
 <% @lists.each do |list| %>
     <div>
         <%= list.address %>
-        <%= list.pickUpDate %>
+        <p class="timestring"><%= list.pickUpDate %></p>
         distance away from you...
         <%= link_to "Show more", list_path(list) %>
     </div>
@@ -16,3 +16,9 @@
 <% if @lists.length === 0 %>
     <p>There are no lists.</p>
 <% end %>
+
+<script>
+    $('.timestring').each(function() {
+        this.textContent = moment(this.textContent).format('lll');
+    });
+</script>
