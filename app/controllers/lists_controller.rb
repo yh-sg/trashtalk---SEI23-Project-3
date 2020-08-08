@@ -4,6 +4,7 @@ class ListsController < ApplicationController
 
   def new
     @list = List.new
+    type = @list.types.build
   end
 
   def create 
@@ -39,11 +40,15 @@ class ListsController < ApplicationController
     end 
   end 
 
+  def parse_comments
+    comments_from_form = params['myform']['comments']
+  end
+
   private
   
   def list_params
     # for now, the permitted format for date is yyyy-mm-dd
-    params.require(:list).permit(:address, :pickUpDate, :remarks)
+    params.require(:list).permit(:address, :pickUpDate, :remarks, types_attributes: [:material, :remarks, :weight])
   end
 
 end
