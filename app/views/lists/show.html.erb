@@ -1,0 +1,29 @@
+<h1>Lists#show</h1>
+<p>Find me in app/views/lists/show.html.erb</p>
+
+<p>Belongs to <%= @list.user.username %></p>
+<p>Pick up address <%= @list.address %></p>
+<p>These are the items... #do a loop through the items</p>
+
+<% if @list.status == 0 %>
+    This list is open
+<% elsif @list.status == 1 %>
+    This list is assigned
+<% elsif @list.status == 2 %>
+    This list is completed
+<% end %>
+
+<%  if (current_user.role === "user" || current_user.role === "admin") && (@list.status === 0)  %>
+    <%= form_for @list, url: assign_list_path(@list.id) do |f| %>
+        <%= f.submit "Fulfil" %>
+    <% end %>
+<% end %>
+
+<% if @list.user.id === current_user.id %>
+    This list belongs to you
+    <% if (current_user.role === "user" || current_user.role === "admin") && @list.status === 1 %>
+        <%= form_for @list, url: complete_list_path(@list.id) do |f| %>
+            <%= f.submit "Complete" %>
+        <% end %>
+    <% end %>
+<% end %>

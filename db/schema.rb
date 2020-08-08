@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2020_08_08_034555) do
   enable_extension "plpgsql"
 
   create_table "lists", force: :cascade do |t|
-    t.integer "status"
+    t.integer "status" # 0 - open, 1 - doing, 2 - done
     t.string "remarks"
     t.date "pickUpDate"
     t.string "address"
