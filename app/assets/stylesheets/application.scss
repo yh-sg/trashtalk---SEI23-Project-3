@@ -29,6 +29,16 @@ body {
     line-height: 26px;
 }
 
+.top-bar {
+    background-color: $secondary-color;
+    color: $primary-color;
+    height: 40px;
+}
+
+.brand {
+    font-size: 17px;
+}
+
 footer {
     font-family: Helvetica, sans-serif;
     font-size: 14px;
