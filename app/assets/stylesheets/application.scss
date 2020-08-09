@@ -10,25 +10,15 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
- *= require bootstrap/scss/bootstrap
  */
 
-// @import "bootstrap/scss/bootstrap";
-
-@font-face {
-    font-family: 'Abril Text';
-    src: url('/fonts/AbrilText-Regular.woff2') format('woff2'),
-        url('/fonts/AbrilText-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+@import "bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Arbutus+Slab&display=swap');
 
 $primary-color: #f5f5f5;
 $secondary-color: #293173;
 
-$main-font: 'Abril Text', Helvetica, sans-serif;
+$main-font: 'Arbutus Slab', serif;
 
 body {
     background-color: $primary-color;
@@ -36,6 +26,4 @@ body {
     font-family: $main-font;
     font-size: 20px;
     line-height: 26px;
-    letter-spacing: 1px;
-    overflow-x: hidden;
 }
