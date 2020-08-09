@@ -4,6 +4,7 @@ class ListsController < ApplicationController
 
   def new
     @list = List.new
+    type = @list.types.build
   end
 
   def create 
@@ -43,7 +44,7 @@ class ListsController < ApplicationController
   
   def list_params
     # for now, the permitted format for date is yyyy-mm-dd
-    params.require(:list).permit(:address, :pickUpDate, :remarks)
+    params.require(:list).permit(:address, :pickUpDate, :remarks, types_attributes: [:material, :remarks, :weight])
   end
 
 end

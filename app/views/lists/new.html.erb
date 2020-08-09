@@ -17,5 +17,11 @@
         <%= f.text_field :remarks %>
     </div>
 
+    <h3>Items</h3>
+    <button id="addItemToList"> Add new item</button>
+    <div  class="TypesContainer" ></div>
+
     <div><%= f.submit %></div>
+
+    <%= javascript_pack_tag 'addTypeToList' %>
 <% end %>
