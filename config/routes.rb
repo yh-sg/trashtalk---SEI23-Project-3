@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :users
   
   resources :lists # /list/index 
-  get "users/:id/index", to: "users#index", as: :home #user/index
+  get "users/:id/index", to: "users#index", as: :home #user/index => page that shows all lists
   get "users/:id", to: "users#show", as: :user # user/show
   
   # for fufillment
