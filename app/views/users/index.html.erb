@@ -4,7 +4,11 @@
     <%= link_to "Create new lists", new_list_path %>
 <% end %>
 
-<%= image_tag @user.user_image %>
+<% if @user.user_image.attached? %>
+    <%= image_tag @user.user_image %>
+<% else %>
+    <img src="https://files.gabbart.com/lib/common/ProfileImg.png">
+<% end %>
 
 <% @lists.each do |list| %>
     <div>
