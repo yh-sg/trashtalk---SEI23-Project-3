@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_one_attached :user_image
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
