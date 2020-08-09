@@ -17,5 +17,25 @@
 
 // @import "bootstrap/scss/bootstrap";
 
+@font-face {
+    font-family: 'Abril Text';
+    src: url('/fonts/AbrilText-Regular.woff2') format('woff2'),
+        url('/fonts/AbrilText-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 $primary-color: #f5f5f5;
 $secondary-color: #293173;
+
+$main-font: 'Abril Text', Helvetica, sans-serif;
+
+body {
+    background-color: $primary-color;
+    color: $secondary-color;
+    font-family: $main-font;
+    font-size: 20px;
+    line-height: 26px;
+    letter-spacing: 1px;
+    overflow-x: hidden;
+}
