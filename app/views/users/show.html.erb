@@ -1,0 +1,24 @@
+<h1>Dashboard</h1>
+
+<p> Username: <%= @user.username %></p>
+<% if current_user.role != "user" && current_user.id === @user.id %>
+    <%= link_to "Create new lists", new_list_path %>
+<% end %>
+
+<% if current_user.role != "recycler" && current_user.id === @user.id %>
+    <%= link_to "Browse lists", root_path %>
+<% end %>
+
+<h3>Existing lists/ inprogress (<%= @in_progress.length %>)</h3>
+<% @in_progress.each do |li| %>
+    <p>Pick up address: <%= li.address %></p>
+    <p>These are the items... #do a loop through the items</p>
+    <%= link_to "Show more", list_path(li) %>
+<% end %>
+
+<h3>Completed lists (<%= @completed.length %>)</h3>
+<% @completed.each do |li| %>
+    <p>Pick up address: <%= li.address %></p>
+    <p>These are the items... #do a loop through the items</p>
+    <%= link_to "Show more", list_path(li) %>
+<% end %>
