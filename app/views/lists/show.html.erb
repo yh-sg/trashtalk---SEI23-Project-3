@@ -10,6 +10,12 @@
 <p>Created at: <%= @list.created_at.to_date %>, <%= time_ago_in_words(@list.created_at) %> ago</p>
 <p>Remarks: <%= @list.remarks %></p>
 
+<% sum = 0 %>
+<% @list.types.each do |type| %>
+    <% sum = sum + type.weight %>
+<% end %>
+<p>Total weight: <%= sum %>KG</p>
+
 <h3>Items in this list </h3>
 
 <table class="table">
@@ -18,6 +24,7 @@
       <th scope="col">No.</th>
       <th scope="col">Material</th>
       <th scope="col">Remarks</th>
+      <th scope="col">Weight (KG)</th>
     </tr>
   </thead>
   <tbody>
@@ -26,6 +33,7 @@
             <th scope="row"><%= idx + 1 %></th>
             <td><%= type.material %></td>
             <td><%= type.remarks %></td>
+            <td><%= type.weight %></td>
         </tr>
     <% end %>
     </tbody>
