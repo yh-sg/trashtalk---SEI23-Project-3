@@ -15,36 +15,33 @@
     <% if notice %>
       <p class="alert alert-success notice mb-0"><%= notice %></p>
     <% end %>
-
     <% if alert %>
       <p class="alert alert-danger mb-0"><%= alert %></p>
     <% end %>
 
-    <nav class="navbar top-bar">
+    <div class="navbar top-bar">
         <div class="brand ml-2">#TrashTalks</div>
-        <a href="https://github.com/yh-sg/trashtalks"><i class="fa fa-github git mr-2" style="font-size: 24px;"></i></a>
-    </nav>
+        <a href="https://github.com/yh-sg/trashtalks" target="blank"><i class="fa fa-github git mr-2" style="font-size: 24px;"></i></a>
+    </div>
 
     <% if user_signed_in? %>
-      <% if current_user.role === "user"%>
-        collector
-      <% else %>
-        <%= current_user.role %>
+      <%= link_to user_path(current_user.id) do %>
       <% end %>
         <%= link_to user_path(current_user.id) do %>
           <%= current_user.username %>
         <% end %>
         <%= link_to  "Logout", destroy_user_session_path, method: :delete %>    
       <% else %>
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mx-auto">
-          <li><%= link_to "Home", root_path, class: "breadcrumb-item" %></li>
-          <li><%= link_to "Sign Up", new_user_registration_path, class: "breadcrumb-item" %></li>
-          <li><%= link_to "Log In", new_user_session_path, class: "breadcrumb-item" %></li>
-        </ol>
-      </nav>
+      <div class="navbar second-nav">
+        <ul class="breadcrumb second-bread mx-auto">
+          <li><%= link_to "Home", root_path, class: "bread-item mr-4" %></li>
+          <span class="mr-4">|</span>
+          <li><%= link_to "Sign Up", new_user_registration_path, class: "bread-item mr-4" %></li>
+          <span class="mr-4">|</span>
+          <li><%= link_to "Log In", new_user_session_path, class: "bread-item" %></li>
+        </ul>
+      </div>
     <% end %>
-
     <%= yield %>
     <footer>
       <div class="container footer">

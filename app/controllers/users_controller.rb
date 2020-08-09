@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     if @user.role === "user"
       # find all the Lists where the user is a collector
       lists = List.where(collector: @user.id)
-    elsif current_user.role === "recycler"
+    elsif @user.role === "recycler"
       lists = User.find(@user.id).lists
     else # this person is an admin, just display everything
       lists = List.all
@@ -48,6 +48,7 @@ class UsersController < ApplicationController
   end
 
   private
+  
   def set_user
     @user = current_user
   end
