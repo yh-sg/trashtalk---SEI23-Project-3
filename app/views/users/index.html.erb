@@ -1,4 +1,6 @@
-<h1>Index</h1>
+<div class="container">
+        <div class="col-md-12 text-center mt-4">
+<h1>Recycler/Collector Index</h1>
 
 <% if current_user.role != "user" %>
     <%= link_to "Create new lists", new_list_path %>
@@ -9,6 +11,15 @@
 <% else %>
     <img src="https://files.gabbart.com/lib/common/ProfileImg.png">
 <% end %>
+
+<div>
+<%= current_user.username %>
+</div>
+<div>
+      <%= link_to user_path(current_user.id) do %>
+     User Information
+      <% end %>
+</div>
 
 <% @lists.each do |list| %>
     <div>
@@ -28,3 +39,6 @@
         this.textContent = moment(this.textContent).format('lll');
     });
 </script>
+
+</div>
+</div>
