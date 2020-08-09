@@ -17,9 +17,13 @@ const generateDomElement = (type, className = null) => {
 }
 
 let removeContainer = (e) => { 
-    e.preventDefault();
+    // prevent the form from being submitted
+    e.preventDefault(); 
     let tyContainer = e.target.parentNode
-    if (tyContainer.parentNode.childElementCount > 1 ) tyContainer.parentNode.removeChild(tyContainer)
+
+    // only when the current items list have more than 1 item, that we allow deletion of items
+    if (tyContainer.parentNode.childElementCount > 1 ) 
+        tyContainer.parentNode.removeChild(tyContainer)
 }
 
 const generateTypeInputForm = (index) => {
