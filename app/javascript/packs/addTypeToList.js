@@ -16,10 +16,16 @@ const generateDomElement = (type, className = null) => {
     return element;
 }
 
+let removeContainer = (e) => { 
+    e.preventDefault();
+    let tyContainer = e.target.parentNode
+    if (tyContainer.parentNode.childElementCount > 1 ) tyContainer.parentNode.removeChild(tyContainer)
+}
+
 const generateTypeInputForm = (index) => {
 
     // create wrapper container
-    const typeInputContainerEl= generateDomElement("div","TypeInputContainer");
+    const typeInputContainerEl = generateDomElement("div","TypeInputContainer");
 
 
     // create material inputs
@@ -28,10 +34,10 @@ const generateTypeInputForm = (index) => {
     for (const material of materials) {
         const inputEl = generateDomElement("input")
         inputEl.type = "radio"
-        // from ... commented for now, pending Elisa...
+        // *** from ... commented for now, pending Elisa...
         // inputEl.value = `{:value=>&quot;${material}&quot;}`
 
-        // to...
+        // *** to...
         inputEl.value = `${material}`
         inputEl.name = `list[types_attributes][${index}][material]`
         
@@ -81,7 +87,13 @@ const generateTypeInputForm = (index) => {
 
     weightContainerEl.appendChild(weightInputEl);
 
-    materialInputContainerEl.appendChild(weightContainerEl)
+    // Adding remove button
+    const removeBtn = generateDomElement("button")
+    removeBtn.textContent = "Remove"
+    removeBtn.addEventListener('click', removeContainer)
+
+    materialInputContainerEl.appendChild(weightContainerEl);
+    typeInputContainerEl.appendChild(removeBtn)
     
     typesContainer.appendChild(typeInputContainerEl);
 }
