@@ -39,6 +39,17 @@ body {
     font-size: 17px;
 }
 
+.git {
+    font-size: 24px;
+    color: $primary-color;
+    text-decoration: none;
+}
+
+.git:hover {
+    text-decoration: none;
+    color: turquoise;
+}
+
 footer {
     font-family: Helvetica, sans-serif;
     font-size: 14px;

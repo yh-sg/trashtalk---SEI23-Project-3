@@ -2,15 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-
 .logo {
     -webkit-animation: wobble-ver-left .8s both;
     animation: wobble-ver-left .8s both;
 }
 
-.discover {
+.start {
     color: #293173;
     text-decoration: underline;
+}
+
+.start:hover {
+    color: turquoise;
 }
 
 
