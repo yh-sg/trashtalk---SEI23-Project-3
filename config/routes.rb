@@ -1,5 +1,7 @@
 
 Rails.application.routes.draw do
+  get 'intro/index'
+  get 'intro/show'
   devise_for :users
   
   resources :lists # /list/index 
@@ -10,6 +12,6 @@ Rails.application.routes.draw do
   patch "/list/:id/assign", to: "lists#assign", as: :assign_list
   patch "/list/:id/complete", to: "lists#complete", as: :complete_list
 
-  root 'users#index'
+  root 'intro#index'
 
 end

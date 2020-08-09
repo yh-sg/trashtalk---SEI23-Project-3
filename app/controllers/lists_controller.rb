@@ -13,7 +13,7 @@ class ListsController < ApplicationController
     @list.user = current_user
 
     if @list.save
-      redirect_to root_path
+      redirect_to user_path(current_user.id)
     else 
       render :new
     end 
@@ -28,7 +28,7 @@ class ListsController < ApplicationController
     list.collector = current_user.id
     list.update(status: 1) # 0 - unfulfilled, 1 - doing, 2 - done
     if list.save 
-      redirect_to root_path
+      redirect_to user_path(current_user.id)
     end
   end 
 
@@ -36,7 +36,7 @@ class ListsController < ApplicationController
     list = List.find(params[:id])
     list.update(status: 2) 
     if list.save 
-      redirect_to root_path
+      redirect_to user_path(current_user.id)
     end 
   end 
 
