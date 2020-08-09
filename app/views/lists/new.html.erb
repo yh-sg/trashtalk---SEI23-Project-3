@@ -1,6 +1,15 @@
 <h1>Lists#new</h1>
 <p>Find me in app/views/lists/new.html.erb</p>
 
+<% if @list.errors.any? %>
+    <%= pluralize(@list.errors.count, "error") %>
+    <% @list.errors.full_messages.each do |err| %>
+        <div> 
+            <%= err %>
+        </div>
+    <% end %>
+<% end %>
+
 <%= form_for @list do |f| %>
     <div>
         <%= f.label :address %>
