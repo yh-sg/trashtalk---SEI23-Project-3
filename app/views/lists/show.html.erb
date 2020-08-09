@@ -60,7 +60,7 @@
     <p>This list belongs to you</p> <%# For now.. We display the same message for all %>
 
     <%# This list belongs to the collector and the list is in progress %>
-    <% if (current_user.role === "user") && @list.status === 1 %>
+    <% if current_user.role === "user" && @list.status === 1 %>
         <%= form_for @list, url: complete_list_path(@list.id) do |f| %>
             <%= f.submit "Complete" %>
         <% end %>
@@ -70,4 +70,5 @@
 <%# The user can edit and destroy their own lists #%>
 <% if current_user.id === @list.user.id %>
     <%= link_to "Delete", list_path(@list), method: "delete", data:{ confirm: "Are you sure?"} %>
+    <%= link_to "Edit", edit_list_path(@list) %>
 <% end %>   
