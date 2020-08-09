@@ -20,8 +20,13 @@ class ListsController < ApplicationController
     end 
   end 
 
-  def show
+  def show # individual List pages
     @list = List.find(params[:id])
+
+    if @list.collector != nil # if the list is being collected
+      # we find the name and display it
+      @assigned = User.find(@list.collector).username
+    end 
   end
 
   def assign # the collector has clicked to assign this task to themselves
@@ -44,7 +49,6 @@ class ListsController < ApplicationController
   private
   
   def list_params
-    # for now, the permitted format for date is yyyy-mm-dd
     params.require(:list).permit(:address, :pickUpDate, :remarks, types_attributes: [:material, :remarks, :weight])
   end
 
