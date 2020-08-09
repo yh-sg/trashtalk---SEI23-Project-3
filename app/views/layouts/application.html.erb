@@ -13,11 +13,11 @@
 
   <body>
     <% if notice %>
-      <p class="alert alert-success notice"><%= notice %></p>
+      <p class="alert alert-success notice mb-0"><%= notice %></p>
     <% end %>
 
     <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
+      <p class="alert alert-danger mb-0"><%= alert %></p>
     <% end %>
 
     <nav class="navbar top-bar">
@@ -36,14 +36,13 @@
         <% end %>
         <%= link_to  "Logout", destroy_user_session_path, method: :delete %>    
       <% else %>
-    <div class="dropdown">
-      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span>Navigate here</span>
-      </a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <%= link_to "Sign up", new_user_registration_path, class: "dropdown-item" %>
-        <%= link_to "Log In", new_user_session_path, class: "dropdown-item" %>
-    </div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mx-auto">
+          <li><%= link_to "Home", root_path, class: "breadcrumb-item" %></li>
+          <li><%= link_to "Sign Up", new_user_registration_path, class: "breadcrumb-item" %></li>
+          <li><%= link_to "Log In", new_user_session_path, class: "breadcrumb-item" %></li>
+        </ol>
+      </nav>
     <% end %>
 
     <%= yield %>
