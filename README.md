@@ -1,6 +1,5 @@
 # Trashtalks
 SEI 23 - Project 3
-by Yonghan, Metilda, Elisa and Amirah
 
 #### [Wireframes](https://github.com/yh-sg/trashtalks/tree/master/wireframes)
 #### [User Stories](https://github.com/yh-sg/trashtalks/blob/master/user-stories.md)
@@ -16,6 +15,7 @@ An app that is designed to support and sustain a circular economy by connecting 
 ### Technologies
 * ROR
 * Devise
+* PostgreSQL
 * Bootstrap/Foundation
 
 ### Models
@@ -31,3 +31,9 @@ An app that is designed to support and sustain a circular economy by connecting 
 * Real-time chat application
 * Invite people to join the app via social platforms
 * Payment System
+
+### Team
+- [Yonghan](https://github.com/yh-sg)
+- [Metilda](https://github.com/metildachee)
+- [Elisa](https://github.com/elisaes)
+- [Amirah](https://github.com/amirahsham01)
