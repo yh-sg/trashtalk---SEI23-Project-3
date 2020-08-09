@@ -1,12 +1,10 @@
 class ListsController < ApplicationController
-  before_action :authenticate_user!
-
   def index
-    @lists = List.all
   end
 
   def new
     @list = List.new
+    type = @list.types.build
   end
 
   def create 
@@ -21,19 +19,8 @@ class ListsController < ApplicationController
     end 
   end 
 
-  def destroy
-    if List.find(params[:id]).destroy
-      redirect_to root_path
-    end
-  end 
-
   def show
     @list = List.find(params[:id])
-
-    if @list.collector != nil
-      @assigned = User.find(@list.collector).username
-    end 
-    # @assigned = User.find_by(@list.collector) ? "Unassigned" : User.find_by(@list.collector).username
   end
 
   def assign # the collector has clicked to assign this task to themselves
@@ -57,7 +44,7 @@ class ListsController < ApplicationController
   
   def list_params
     # for now, the permitted format for date is yyyy-mm-dd
-    params.require(:list).permit(:address, :pickUpDate, :remarks)
+    params.require(:list).permit(:address, :pickUpDate, :remarks, types_attributes: [:material, :remarks, :weight])
   end
 
 end
