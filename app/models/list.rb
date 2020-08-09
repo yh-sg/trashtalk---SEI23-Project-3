@@ -1,6 +1,7 @@
 class List < ApplicationRecord
   validates :address, :presence => true,
   :length => { :minimum => 5 }
+  validates :pickUpDate, :presence => true
 
   validate :pickupdate_cannot_be_in_the_past
 
