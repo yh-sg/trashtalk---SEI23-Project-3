@@ -1,12 +1,17 @@
 <h1>Dashboard</h1>
 
+<% if @user.user_image.attached? %>
+    <%= image_tag @user.user_image %>
+<% end %>
+
 <p> Username: <%= @user.username %></p>
 <% if current_user.role != "user" && current_user.id === @user.id %>
     <%= link_to "Create new lists", new_list_path %>
+    <%= link_to "Browse lists", home_path(current_user.id) %>
 <% end %>
 
 <% if current_user.role != "recycler" && current_user.id === @user.id %>
-    <%= link_to "Browse lists", root_path %>
+    <%= link_to "Browse lists", home_path(current_user.id) %>
 <% end %>
 
 <h3>Existing lists/ inprogress (<%= @in_progress.length %>)</h3>
