@@ -54,14 +54,14 @@
       <%= link_to user_path(current_user.id) do %>
         </li>
       <% end %>
-      <li class="nav-item">
+      <li class="nav-item mx-3">
       <%= link_to  "Edit Profile", edit_user_registration_path %>
       </li>
       <li class="nav-item">
       <%= link_to  "Logout", destroy_user_session_path, method: :delete %>
       </li>    
     <% else %>
-    <li class="nav-item">
+    <li class="nav-item mx-3">
       <%= link_to  "Sign up", new_user_registration_path %>
       </li>
     <li class="nav-item">
