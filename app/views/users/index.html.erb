@@ -8,6 +8,11 @@
     <div>
         <p>Place: <%= list.address %><p>
         <p>Place: <%= list.pickUpDate %><p>
+        <% sum = 0 %>
+        <% list.types.each do |ele| %>
+            <% sum = sum + ele.weight %>
+        <% end %>
+        <p>Weight: <%= sum %> KG</p>
 
         <% if list.status === 0 %>
             <p>Status: Open</p>
@@ -17,12 +22,7 @@
             <p>Status: Completed</p>
         <% end %>
         <p><%= link_to "Show more", list_path(list) %></p>
-        <% sum = 0 %>
-        <% list.types.each do |ele| %>
-            <% sum = sum + ele.weight %>
-        <% end %>
-        <p>Weight: <%= sum %> KG
-        </p>
+
     </div>
 <% end %> 
 
