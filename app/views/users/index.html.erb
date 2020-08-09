@@ -4,14 +4,25 @@
     <%= link_to "Create new lists", new_list_path %>
 <% end %>
 
-<%= image_tag @user.user_image %>
-
 <% @lists.each do |list| %>
     <div>
-        <%= list.address %>
-        <p class="timestring"><%= list.pickUpDate %></p>
-        distance away from you...
-        <%= link_to "Show more", list_path(list) %>
+        <p>Place: <%= list.address %><p>
+        <p>Place: <%= list.pickUpDate %><p>
+        <% sum = 0 %>
+        <% list.types.each do |ele| %>
+            <% sum = sum + ele.weight %>
+        <% end %>
+        <p>Weight: <%= sum %> KG</p>
+
+        <% if list.status === 0 %>
+            <p>Status: Open</p>
+        <% elsif list.status === 1 %>
+            <p>Status: Assigned</p>
+        <% else %>
+            <p>Status: Completed</p>
+        <% end %>
+        <p><%= link_to "Show more", list_path(list) %></p>
+
     </div>
 <% end %> 
 
