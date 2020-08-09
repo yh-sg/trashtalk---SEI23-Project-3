@@ -23,13 +23,16 @@ const generateTypeInputForm = (index) => {
 
 
     // create material inputs
-
     const materialInputContainerEl = generateDomElement("div", "MaterialInputs");
 
     for (const material of materials) {
         const inputEl = generateDomElement("input")
         inputEl.type = "radio"
-        inputEl.value = `{:value=>&quot;${material}&quot;}`
+        // from ... commented for now, pending Elisa...
+        // inputEl.value = `{:value=>&quot;${material}&quot;}`
+
+        // to...
+        inputEl.value = `${material}`
         inputEl.name = `list[types_attributes][${index}][material]`
         
         materialInputContainerEl.appendChild(inputEl);

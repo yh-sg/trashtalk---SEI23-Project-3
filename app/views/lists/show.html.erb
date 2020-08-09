@@ -6,10 +6,32 @@
     <% end %>
 </p>
 <p>Pick up address: <%= @list.address %></p>
-<% @list.types.each do |type| %>
-    
-<% end %>
+<p>Pick up date: <%= @list.pickUpDate.to_s %></p>
+<p>Created at: <%= @list.created_at.to_date %>, <%= time_ago_in_words(@list.created_at) %> ago</p>
+<p>Remarks: <%= @list.remarks %></p>
 
+<h3>Items in this list </h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">Material</th>
+      <th scope="col">Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @list.types.each_with_index do |type, idx|%>
+        <tr>
+            <th scope="row"><%= idx + 1 %></th>
+            <td><%= type.material %></td>
+            <td><%= type.remarks %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
+
+<h3>Status</h3>
 <p>
     <% if @list.status == 0 %>
         This list is open
