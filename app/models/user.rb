@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  validates :phone_number, format: { with: /(6|8|9)\d{7}/, message: "invalid" }
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
