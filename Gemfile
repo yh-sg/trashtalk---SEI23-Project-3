@@ -11,6 +11,8 @@ gem 'pg', '>= 0.18', '< 2.0'
 # devise
 gem 'devise'
 
+# for date formatting
+gem 'momentjs-rails', '>= 2.9.0'
 # Use Puma as the app server
 
 gem 'puma', '~> 4.1'
