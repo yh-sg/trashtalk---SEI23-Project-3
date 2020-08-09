@@ -1,17 +1,48 @@
-<h1>Index</h1>
+<div class="container mt-3">
+<h1>Recycler/Collector Index</h1>
 
+ <div class="row">
+    <div class="col-4">
 <% if current_user.role != "user" %>
     <%= link_to "Create new lists", new_list_path %>
 <% end %>
 
-<%= image_tag @user.user_image %>
+<% if @user.user_image.attached? %>
+    <%= image_tag @user.user_image %>
+<% else %>
+    <img src="https://files.gabbart.com/lib/common/ProfileImg.png">
+<% end %>
 
+<div>
+<%= current_user.username %>
+</div>
+<div>
+      <%= link_to user_path(current_user.id) do %>
+     User Information
+      <% end %>
+</div>
+  </div>
+
+ <div class="col">
 <% @lists.each do |list| %>
     <div>
-        <%= list.address %>
-        <p class="timestring"><%= list.pickUpDate %></p>
-        distance away from you...
-        <%= link_to "Show more", list_path(list) %>
+        <p>Place: <%= list.address %><p>
+        <p>Place: <%= list.pickUpDate %><p>
+        <% sum = 0 %>
+        <% list.types.each do |ele| %>
+            <% sum = sum + ele.weight %>
+        <% end %>
+        <p>Weight: <%= sum %> KG</p>
+
+        <% if list.status === 0 %>
+            <p>Status: Open</p>
+        <% elsif list.status === 1 %>
+            <p>Status: Assigned</p>
+        <% else %>
+            <p>Status: Completed</p>
+        <% end %>
+        <p><%= link_to "Show more", list_path(list) %></p>
+
     </div>
 <% end %> 
 
@@ -24,3 +55,6 @@
         this.textContent = moment(this.textContent).format('lll');
     });
 </script>
+</div>
+  </div>
+</div>
