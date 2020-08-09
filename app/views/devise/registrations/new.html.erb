@@ -38,6 +38,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :user_image %><br />
+    <%= f.file_field :user_image %>
+   </div>
+
+  <div class="field">
     <%= f.radio_button :role, 'user' %>
     <%= label :role_user, 'Collector' %>
     <%= f.radio_button :role, 'recycler', :checked => true %> 

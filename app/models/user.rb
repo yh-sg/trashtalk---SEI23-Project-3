@@ -11,7 +11,7 @@ class User < ApplicationRecord
   after_initialize :set_default_role, :if => :new_record?
 
   has_many :lists
-  
+  has_one_attached :user_image
   def set_default_role
     self.role ||= :user
   end
