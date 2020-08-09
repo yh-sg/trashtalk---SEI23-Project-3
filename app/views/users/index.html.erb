@@ -4,6 +4,8 @@
     <%= link_to "Create new lists", new_list_path %>
 <% end %>
 
+<%= image_tag @user.user_image %>
+
 <% @lists.each do |list| %>
     <div>
         <%= list.address %>
