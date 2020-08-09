@@ -53,6 +53,8 @@ const generateTypeInputForm = (index) => {
         materialInputContainerEl.appendChild(labelEl);
     
     }
+    // by default the first material is chosen
+    materialInputContainerEl.childNodes[0].checked = true 
 
     typeInputContainerEl.appendChild(materialInputContainerEl);
 
