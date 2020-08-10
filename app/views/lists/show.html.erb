@@ -9,6 +9,14 @@
 <p>Pick up date: <%= @list.pickUpDate.to_s %></p>
 <p>Created at: <%= @list.created_at.to_date %>, <%= time_ago_in_words(@list.created_at) %> ago</p>
 <p>Remarks: <%= @list.remarks %></p>
+<% if @list.status === 0 %>
+    <p>Status: Open</p>
+<% elsif @list.status === 1 %>
+    <p>Status: Assigned</p>
+<% else %>
+    <p>Status: Completed</p>
+<% end %>
+
 
 <% sum = 0 %>
 <% @list.types.each do |type| %>
@@ -76,7 +84,13 @@
 <% end %>
 
 <%# The user can edit and destroy their own lists #%>
-<% if current_user.id === @list.user.id %>
+    
+<%# Owner can delete list if it is open or completed i.e. not assigned %>
+<% if current_user.id === @list.user.id && (@list.status === 0 || @list.status === 2)  %>
     <%= link_to "Delete", list_path(@list), method: "delete", data:{ confirm: "Are you sure?"} %>
-    <%= link_to "Edit", edit_list_path(@list) %>
 <% end %>   
+
+<%# Owner can only edit when the list is open or assigned i.e. not completed %>
+<% if current_user.id === @list.user.id && (@list.status === 0 || @list.status === 1) %>
+    <%= link_to "Edit", edit_list_path(@list) %>
+<% end %>
