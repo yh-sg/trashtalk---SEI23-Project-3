@@ -2,15 +2,22 @@
 
 <h1 class="text-center">Browse List</h1>
 
-
 <div>
 <% if current_user.role != "user" %>
     <%= link_to "Create new lists", new_list_path , :class => 'btn btn-outline-success mt-2'%>
 <% end %>
 </div>
 
-<% @lists.each do |list| %>
-    <div >
+  <div class="row">
+    <div class="col border">
+            <strong>MAP for Metilda</strong>
+    </div>
+  </div>
+
+<% @lists.in_groups_of(4, false).each do |group| %>
+     <div class="row">
+     <% group.each do |list| %>
+    <div class="col-md-3">
         <p>Place: <%= list.address %><p>
         <p>Place: <%= list.pickUpDate %><p>
         <% sum = 0 %>
@@ -27,9 +34,10 @@
             <p>Status: Completed</p>
         <% end %>
         <p><%= link_to "Show more", list_path(list) %></p>
-
     </div>
 <% end %> 
+</div>
+<% end %>
 
 <% if @lists.length === 0 %>
     <p>There are no lists.</p>
