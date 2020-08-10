@@ -3,13 +3,11 @@
 // Initialise 
 let typeData = []
 
-// get all the containers with the same class
+// get all necessary DOM components
 const typesContainer = document.getElementsByClassName("TypesContainer")
 const createListBtn = document.getElementById("submitBtn")
-console.log(createListBtn)
 
-// For edit form ===> We append all the data
-// we need to add an if else for new form
+// get all the data from the divs, if the form is empty, the array will be empty as well
 $('.TypesContainer').each(function(){
     typeData.push(($(this).data('types')))
 });
@@ -37,8 +35,10 @@ let removeContainer = (e) => {
     e.preventDefault(); 
     let tyContainer = e.target.parentNode
 
+    // if the current form is new
     if (typesContainer.length > 1 && typeData.length === 0)
         tyContainer.parentNode.remove()
+    // if the current form is edit
     else if (typesContainer.length > 1 && typeData.length > 0) 
         tyContainer.remove()
 }
@@ -66,21 +66,22 @@ const generateTypeInputForm = (index, container) => {
     
     }
 
-    if (typeData.length != 0) {
-        let checkedButton = 0
-        if (typeData[index] !== undefined) 
-            checkedButton = materials.indexOf(typeData[index].material)
-        
-        if (checkedButton === 1)
-            materialInputContainerEl.childNodes[2].checked = true 
-        else if (checkedButton === 2) 
-            materialInputContainerEl.childNodes[4].checked = true
-        else 
-            materialInputContainerEl.childNodes[0].checked = true 
-    }
-    else {
+
+    // we check the radio button accordingly
+    let checkedButton = 0
+
+    // if this is edit form, get the data and reference the correct button
+    if (typeData[index] !== undefined) 
+        checkedButton = materials.indexOf(typeData[index].material)
+    
+    // using an if/else, skip the labels and update the radio buttons instead
+    if (checkedButton === 1)
+        materialInputContainerEl.childNodes[2].checked = true 
+    else if (checkedButton === 2) 
+        materialInputContainerEl.childNodes[4].checked = true
+    else // default of metal or index = 0
         materialInputContainerEl.childNodes[0].checked = true 
-    }
+
 
     typeInputContainerEl.appendChild(materialInputContainerEl);
 
@@ -94,9 +95,8 @@ const generateTypeInputForm = (index, container) => {
 
     const remarkInputEl = generateDomElement("input");
 
-    // >>> For edit form
+    // we update the remarks accordingly
     remarkInputEl.value = typeData[index] != undefined ? typeData[index].remarks : ""
-    // end for edit form
 
     remarkInputEl.type = "text"
     remarkInputEl.name = `list[types_attributes][${index}][remarks]`
@@ -120,9 +120,8 @@ const generateTypeInputForm = (index, container) => {
     weightInputEl.min="0.1"
     weightInputEl.max="10"
 
-    // >>> for Edit form 
+    // we update the weight accordingly
     weightInputEl.value = typeData[index] != undefined ? typeData[index].weight : 0
-    // end edit form 
     
     weightContainerEl.appendChild(weightInputEl);
 
@@ -135,10 +134,9 @@ const generateTypeInputForm = (index, container) => {
     materialInputContainerEl.appendChild(weightContainerEl);
     typeInputContainerEl.appendChild(removeBtn)
     
-    if (container != undefined) {
-        container.appendChild(typeInputContainerEl)
-        document.querySelector("form").insertBefore(container, submitBtn)
-    }
+    container.appendChild(typeInputContainerEl)
+    // we will insert this container before submitBtn
+    document.querySelector("form").insertBefore(container, submitBtn)
 }
 
 addItemButton.addEventListener("click", (e)=>{
@@ -147,6 +145,7 @@ addItemButton.addEventListener("click", (e)=>{
     generateTypeInputForm(listItemIdx++, container);
 })
 
+// new form - following runs exactly once, edit form will run for as many items as there are
 for (let i = 0; i < typesContainer.length; i++) {
     generateTypeInputForm(listItemIdx++, typesContainer[i]);
 }
