@@ -7,6 +7,7 @@
     <% end %>
 <% end %>
 
+<div class="container" >
 <%= form_for @list do |f| %>
     <div>
         <%= f.label :address %>
@@ -41,3 +42,4 @@
 
     <%= javascript_pack_tag 'addTypeToList' %>
 <% end %>
+</div>
