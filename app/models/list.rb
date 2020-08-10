@@ -1,6 +1,6 @@
 class List < ApplicationRecord
   geocoded_by :address
-  after_validation :geocode, if: :address_changed?
+  after_validation :geocode
 
   def full_address
     return [address, "Singapore", "Singapore"].compact.join(', ')
