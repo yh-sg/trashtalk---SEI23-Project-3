@@ -1,4 +1,5 @@
-const typesContainer = document.querySelector(".TypesContainer")
+// const typesContainer = document.querySelector(".TypesContainer")
+const typesContainer = document.getElementsByClassName("TypesContainer")
 const addItemButton = document.querySelector("#addItemToList");
 let listItemIdx = 0;
 
@@ -27,7 +28,7 @@ let removeContainer = (e) => {
         tyContainer.parentNode.removeChild(tyContainer)
 }
 
-const generateTypeInputForm = (index) => {
+const generateTypeInputForm = (index, container) => {
 
     // create wrapper container
     const typeInputContainerEl = generateDomElement("div","TypeInputContainer");
@@ -103,7 +104,8 @@ const generateTypeInputForm = (index) => {
     materialInputContainerEl.appendChild(weightContainerEl);
     typeInputContainerEl.appendChild(removeBtn)
     
-    typesContainer.appendChild(typeInputContainerEl);
+    // typesContainer.appendChild(typeInputContainerEl);
+    container.appendChild(typeInputContainerEl)
 }
 
 addItemButton.addEventListener("click", (e)=>{
@@ -111,4 +113,6 @@ addItemButton.addEventListener("click", (e)=>{
     generateTypeInputForm(listItemIdx++);
 })
 
-generateTypeInputForm(listItemIdx++);
+for (let i = 0; i < typesContainer.length; i++) {
+    generateTypeInputForm(listItemIdx++, typesContainer[i]);
+}
