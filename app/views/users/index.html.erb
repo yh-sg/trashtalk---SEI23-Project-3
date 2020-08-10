@@ -27,10 +27,11 @@
   </div>
 
  <div class="col">
-<% @lists.each do |list| %>
+<% @lists.each_with_index do |list, idx| %>
     <div>
         <p>Place: <%= list.address %><p>
         <p>Place: <%= list.pickUpDate %><p>
+        <p>Distance from you: <%= @distance %> </p>
         <% sum = 0 %>
         <% list.types.each do |ele| %>
             <% sum = sum + ele.weight %>
