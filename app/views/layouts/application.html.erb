@@ -18,15 +18,62 @@
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
 
-    <% if user_signed_in? %>
-      <%= link_to user_path(current_user.id) do %>
-        <%= current_user.username %>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                    <% if user_signed_in? %>
+          <li class="nav-item">
+          <a class="nav-link">Welcome!</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="#">Dashboard</a>
+        </li>
+          </li>
+          <% if current_user.role != "user" && current_user.id === @user.id %>
+          <li class="nav-item">
+          <a class="nav-link" href="#">How it works?</a>
+        </li>
+           <% end %>
       <% end %>
-      <%= link_to  "Logout", destroy_user_session_path, method: :delete %>    
+
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="/">Trashtalk</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+    <% if user_signed_in? %>
+    <li class="nav-item">
+      <%= link_to user_path(current_user.id) do %>
+        </li>
+      <% end %>
+      <li class="nav-item mx-3">
+      <%= link_to  "Edit Profile", edit_user_registration_path %>
+      </li>
+      <li class="nav-item">
+      <%= link_to  "Logout", destroy_user_session_path, method: :delete %>
+      </li>    
     <% else %>
+    <li class="nav-item mx-3">
       <%= link_to  "Sign up", new_user_registration_path %>
+      </li>
+    <li class="nav-item">
       <%= link_to  "Sign In", new_user_session_path %>
+      </li>
     <% end %>
+        </ul>
+    </div>
+</nav>
+
     <%= yield %>
   </body>
 </html>
