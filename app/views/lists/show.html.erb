@@ -91,12 +91,12 @@
 <%# The user can edit and destroy their own lists #%>
     
 <%# Owner can delete list if it is open or completed i.e. not assigned %>
-<% if current_user.id === @list.user.id && (@list.status === 0 || @list.status === 2)  %>
+<% if current_user.id === @list.user.id && (@list.status === 0 || @list.status === 2) || current_user.role === "admin" %>
     <%= link_to "Delete", list_path(@list), method: "delete", data:{ confirm: "Are you sure?"},:class => 'btn btn-outline-danger' %>
 <% end %>   
 
 <%# Owner can only edit when the list is open or assigned i.e. not completed %>
-<% if current_user.id === @list.user.id && (@list.status === 0 || @list.status === 1) %>
+<% if current_user.id === @list.user.id && (@list.status === 0 || @list.status === 1) || current_user.role === "admin" %>
     <%= link_to "Edit", edit_list_path(@list) ,:class => 'btn btn-outline-info'%>
 <% end %>
 
