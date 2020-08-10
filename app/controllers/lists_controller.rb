@@ -24,6 +24,22 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
   end 
 
+  def update 
+    @list = List.find(params[:id])
+
+    # remove everything in the current list
+    @list.types.each do |type|
+      type.destroy
+    end 
+
+    # rebuild everything
+    if @list.update(list_params)
+      redirect_to list_path(@list)
+    else 
+      render :edit
+    end 
+  end 
+
   def show # individual List pages
     @list = List.find(params[:id])
 
