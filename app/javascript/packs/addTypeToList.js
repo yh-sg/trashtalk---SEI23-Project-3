@@ -45,17 +45,12 @@ const generateTypeInputForm = (index, container) => {
     // create wrapper container
     const typeInputContainerEl = generateDomElement("div","TypeInputContainer");
 
-
     // create material inputs
     const materialInputContainerEl = generateDomElement("div", "MaterialInputs");
 
     for (const material of materials) {
         const inputEl = generateDomElement("input")
         inputEl.type = "radio"
-        // *** from ... commented for now, pending Elisa...
-        // inputEl.value = `{:value=>&quot;${material}&quot;}`
-
-        // *** to...
         inputEl.value = `${material}`
         inputEl.name = `list[types_attributes][${index}][material]`
         
@@ -67,13 +62,18 @@ const generateTypeInputForm = (index, container) => {
         materialInputContainerEl.appendChild(labelEl);
     
     }
-    // by default the first material is chosen
-    materialInputContainerEl.childNodes[0].checked = true 
+
+    let checkedButton = materials.indexOf(typeData[index].material)
+    if (checkedButton === 1)
+        materialInputContainerEl.childNodes[2].checked = true 
+    else if (checkedButton === 2) 
+        materialInputContainerEl.childNodes[4].checked = true
+    else 
+        materialInputContainerEl.childNodes[0].checked = true 
 
     typeInputContainerEl.appendChild(materialInputContainerEl);
 
     // create remarks input
-
     const remarkContainerEl = generateDomElement("div","RemarksInput")
 
     const remarksLabelEl = generateDomElement("label");
@@ -83,7 +83,7 @@ const generateTypeInputForm = (index, container) => {
 
     const remarkInputEl = generateDomElement("input");
 
-    // For edit form 
+    // >>> For edit form 
     remarkInputEl.value = typeData[index].remarks != undefined ? typeData[index].remarks : ""
     // end for edit form
 
@@ -100,10 +100,6 @@ const generateTypeInputForm = (index, container) => {
     const weightLabelEl = generateDomElement("label");
     weightLabelEl.innerText = "Weight(KG)"
 
-    // for Edit form 
-    weightLabelEl.value = typeData[index].weight != undefined ? typeData[index].weight : 0
-    // end edit form 
-
     weightContainerEl.appendChild(weightLabelEl);
 
     const weightInputEl = generateDomElement("input");
@@ -113,6 +109,10 @@ const generateTypeInputForm = (index, container) => {
     weightInputEl.min="0.1"
     weightInputEl.max="10"
 
+    // >>> for Edit form 
+    weightInputEl.value = typeData[index].weight != undefined ? typeData[index].weight : 0
+    // end edit form 
+    
     weightContainerEl.appendChild(weightInputEl);
 
     // Adding remove button
