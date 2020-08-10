@@ -16,20 +16,33 @@ const generateDomElement = (type, className = null) => {
     return element;
 }
 
+let removeContainer = (e) => { 
+    // prevent the form from being submitted
+    e.preventDefault(); 
+    let tyContainer = e.target.parentNode
+
+    // only when the current items list have more than 1 item, that we allow deletion of items
+    if (tyContainer.parentNode.childElementCount > 1 ) 
+        tyContainer.parentNode.removeChild(tyContainer)
+}
+
 const generateTypeInputForm = (index) => {
 
     // create wrapper container
-    const typeInputContainerEl= generateDomElement("div","TypeInputContainer");
+    const typeInputContainerEl = generateDomElement("div","TypeInputContainer");
 
 
     // create material inputs
-
     const materialInputContainerEl = generateDomElement("div", "MaterialInputs");
 
     for (const material of materials) {
         const inputEl = generateDomElement("input")
         inputEl.type = "radio"
-        inputEl.value = `{:value=>&quot;${material}&quot;}`
+        // *** from ... commented for now, pending Elisa...
+        // inputEl.value = `{:value=>&quot;${material}&quot;}`
+
+        // *** to...
+        inputEl.value = `${material}`
         inputEl.name = `list[types_attributes][${index}][material]`
         
         materialInputContainerEl.appendChild(inputEl);
@@ -40,6 +53,8 @@ const generateTypeInputForm = (index) => {
         materialInputContainerEl.appendChild(labelEl);
     
     }
+    // by default the first material is chosen
+    materialInputContainerEl.childNodes[0].checked = true 
 
     typeInputContainerEl.appendChild(materialInputContainerEl);
 
@@ -78,7 +93,13 @@ const generateTypeInputForm = (index) => {
 
     weightContainerEl.appendChild(weightInputEl);
 
-    materialInputContainerEl.appendChild(weightContainerEl)
+    // Adding remove button
+    const removeBtn = generateDomElement("button")
+    removeBtn.textContent = "Remove"
+    removeBtn.addEventListener('click', removeContainer)
+
+    materialInputContainerEl.appendChild(weightContainerEl);
+    typeInputContainerEl.appendChild(removeBtn)
     
     typesContainer.appendChild(typeInputContainerEl);
 }
