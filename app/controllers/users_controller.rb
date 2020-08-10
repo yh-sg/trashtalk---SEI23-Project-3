@@ -3,9 +3,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:index]
 
   def index # landing page when users login, => shows all the lists
-    puts "meow"
-    puts ENV["GOOGLE_API_KEY"]
-
     if (current_user.role === 0) # user is a collector
       @lists = List.where(status: 0)
     else 
