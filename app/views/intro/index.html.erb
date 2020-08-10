@@ -9,16 +9,14 @@
             An app that connects you with recycling agents<br>to help you reduce your trash.
             <span class="start button-box">Find out more.</span>
         </div>
+    </div>
+</div>
 
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-            <!-- Modal content -->
-            HI HELLO
-            <div class="modal-content">
-                <span class="close">&times;</span>
-            </div>
-        </div>
-
+<div class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        HI HELLO
     </div>
 </div>
 
@@ -29,11 +27,11 @@
       document.querySelector(".modal").style.display = "block";
 
       //when 'x' is clicked, modal box disappears
-      let modal = document.querySelector("#myModal");
+      let modalBox = document.querySelector(".modal");
       let span = document.querySelector(".close");
 
           span.onclick = function() {
-            modal.style.display = "none";
+            modalBox.style.display = "none";
           }
     });
 </script>
