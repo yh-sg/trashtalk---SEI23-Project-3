@@ -31,7 +31,7 @@
     <div>
         <p>Place: <%= list.address %><p>
         <p>Place: <%= list.pickUpDate %><p>
-        <p>Distance from you: <%= @distance %> </p>
+        <p>Distance from you: <%= list.distance.round(2) %>km</p>
         <% sum = 0 %>
         <% list.types.each do |ele| %>
             <% sum = sum + ele.weight %>

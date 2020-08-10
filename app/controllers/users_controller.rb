@@ -6,19 +6,11 @@ class UsersController < ApplicationController
     if (current_user.role === "user") # user is a collector
 
       # show lists with accordance to distance whereby status is either open or assigned
-      @lists = List.near(current_user.address, 999999, order: 'distance').where("STATUS != 2")
-
-      @distance = []
-      # we are going to calculate the distance from current_user to the list
-      # >> we are going to calculate the traveling time
-      @lists.each do |li| 
-        # puts current_user.address.distance_to(li.address)
-        # @distance << current_user.address.distance_to(li.address)
-        @distance << 1
-      end 
+      @lists = List.near(current_user.address, 999999, order: 'distance', units: :km).where("STATUS != 2")
+       # >> we are going to calculate the traveling time
     else 
       # if the user is an admin/ regular user, just show all lists
-      @lists = List.all
+      @lists = List.near(current_user.address, 999999, order: 'distance', units: :km)
     end
   end
 
