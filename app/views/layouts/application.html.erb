@@ -55,11 +55,9 @@
         <% else %>
         <div class="navbar second-nav">
           <ul class="breadcrumb second-bread mx-auto">
-            <li><%= link_to "Home", root_path, class: "bread-item mr-4" %></li>
+            <li><%= link_to "Log In", new_user_session_path, class: "bread-item mr-4" %></li>
             <span class="mr-4">|</span>
-            <li><%= link_to "Sign Up", new_user_registration_path, class: "bread-item mr-4" %></li>
-            <span class="mr-4">|</span>
-            <li><%= link_to "Log In", new_user_session_path, class: "bread-item" %></li>
+            <%= link_to "How It Works", intro_show_path, class: "bread-item" %>
           </ul>
         </div>
       <% end %>
