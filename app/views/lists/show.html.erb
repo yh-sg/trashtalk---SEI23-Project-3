@@ -72,7 +72,7 @@
 <%# The user is either admin or collecter and the status is open #%>
 <%  if (current_user.role === "user" || current_user.role === "admin") && (@list.status === 0)  %>
     <%= form_for @list, url: assign_list_path(@list.id) do |f| %>
-        <%= f.submit "Fulfil" %>
+        <%= f.submit "Fulfil" ,:class => 'btn btn-outline-info btn-lg'%>
     <% end %>
 <% end %>
 
@@ -83,7 +83,7 @@
     <%# This list belongs to the collector and the list is in progress %>
     <% if current_user.role === "user" && @list.status === 1 %>
         <%= form_for @list, url: complete_list_path(@list.id) do |f| %>
-            <%= f.submit "Complete" %>
+            <%= f.submit "Complete" ,:class => 'btn btn-outline-success btn-lg'%>
         <% end %>
     <% end %>
 <% end %>
