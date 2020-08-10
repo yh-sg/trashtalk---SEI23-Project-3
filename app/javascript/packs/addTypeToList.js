@@ -5,7 +5,7 @@ let typeData = []
 
 // get all the containers with the same class
 const typesContainer = document.getElementsByClassName("TypesContainer")
-const createListBtn = document.getElementsByName("commit")
+const createListBtn = document.getElementById("submitBtn")
 console.log(createListBtn)
 
 // For edit form ===> We append all the data
@@ -135,7 +135,7 @@ const generateTypeInputForm = (index, container) => {
     
     if (container != undefined) {
         container.appendChild(typeInputContainerEl)
-
+        document.querySelector("form").insertBefore(container, submitBtn)
     }
 }
 
