@@ -31,13 +31,15 @@
     <button id="addItemToList"> Add new item</button>
 
     <% if @list.types != nil %>
+    <%# If this is an edit list %>
         <% @list.types.each do |type| %>
-            meow
-            <div class="TypesContainer" ></div>
+            <%= content_tag :div, class: "TypesContainer", data: { types: type } do %>
+            <% end %>
         <% end %>
+    <% else %>
+        <div class="TypesContainer"></div>
     <% end %>
 
-    <div class="TypesContainer" ></div>
     <div><%= f.submit %></div>
 
     <%= javascript_pack_tag 'addTypeToList' %>

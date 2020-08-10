@@ -1,5 +1,17 @@
 // const typesContainer = document.querySelector(".TypesContainer")
+
+// Initialise 
+let typeData = []
+
+// get all the containers with the same class
 const typesContainer = document.getElementsByClassName("TypesContainer")
+
+// For edit form ===> We append all the data
+// we need to add an if else for new form
+$('.TypesContainer').each(function(){
+    typeData.push(($(this).data('types')))
+});
+
 const addItemButton = document.querySelector("#addItemToList");
 let listItemIdx = 0;
 
@@ -70,6 +82,11 @@ const generateTypeInputForm = (index, container) => {
     remarkContainerEl.appendChild(remarksLabelEl);
 
     const remarkInputEl = generateDomElement("input");
+
+    // For edit form 
+    remarkInputEl.value = typeData[index].remarks != undefined ? typeData[index].remarks : ""
+    // end for edit form
+
     remarkInputEl.type = "text"
     remarkInputEl.name = `list[types_attributes][${index}][remarks]`
 
@@ -78,11 +95,14 @@ const generateTypeInputForm = (index, container) => {
     materialInputContainerEl.appendChild(remarkContainerEl)
     
     // create weight input
-
     const weightContainerEl = generateDomElement("div","WeightInput")
 
     const weightLabelEl = generateDomElement("label");
     weightLabelEl.innerText = "Weight(KG)"
+
+    // for Edit form 
+    weightLabelEl.value = typeData[index].weight != undefined ? typeData[index].weight : 0
+    // end edit form 
 
     weightContainerEl.appendChild(weightLabelEl);
 
