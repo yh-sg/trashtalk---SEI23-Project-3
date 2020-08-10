@@ -3,8 +3,10 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:index]
 
   def index # landing page when users login, => shows all the lists
-    if (current_user.role === 0) # user is a collector
-      @lists = List.where(status: 0)
+    if (current_user.role === "user") # user is a collector
+      
+      # show lists with accordance to distance whereby status is either open or assigned
+      @lists = List.near(current_user.address, 999999, order: 'distance').where("STATUS != 2")
     else 
       # if the user is an admin/ regular user, just show all lists
       @lists = List.all
