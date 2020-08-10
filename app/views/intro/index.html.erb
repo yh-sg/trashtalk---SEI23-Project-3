@@ -7,7 +7,33 @@
         </div>
         <div class="col-sm-12 mx-auto text-center mb-5">
             An app that connects you with recycling agents<br>to help you reduce your trash.
-            <a href="#" class="start">Find out more.</a>
+            <span class="start button-box">Find out more.</span>
         </div>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            HI HELLO
+            <div class="modal-content">
+                <span class="close">&times;</span>
+            </div>
+        </div>
+
     </div>
 </div>
+
+<script>
+    var button = document.querySelector('.button-box');
+    button.addEventListener("click", function(e) {
+      //alert("works");
+      document.querySelector(".modal").style.display = "block";
+
+      //when 'x' is clicked, modal box disappears
+      let modal = document.querySelector("#myModal");
+      let span = document.querySelector(".close");
+
+          span.onclick = function() {
+            modal.style.display = "none";
+          }
+    });
+</script>
