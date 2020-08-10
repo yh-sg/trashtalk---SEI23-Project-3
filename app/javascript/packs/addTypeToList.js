@@ -127,6 +127,9 @@ const generateTypeInputForm = (index, container) => {
 
     // Adding remove button
     const removeBtn = generateDomElement("button")
+    removeBtn.classList.add("btn");
+    removeBtn.classList.add("btn-outline-danger");
+    removeBtn.classList.add("mb-2");
     removeBtn.textContent = "Remove"
     removeBtn.addEventListener('click', removeContainer)
     // end remove button

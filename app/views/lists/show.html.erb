@@ -1,5 +1,6 @@
-<h1>Lists#show</h1>
-
+<div class="container">
+<h1>Lists</h1>
+<hr>
 <p>Belongs to: 
     <%= link_to user_path(@list.user) do %>
         <%= @list.user.username %>
@@ -24,10 +25,12 @@
 <% end %>
 <p>Total weight: <%= sum %>KG</p>
 
+<hr>
+
 <h3>Items in this list </h3>
 
 <table class="table">
-  <thead>
+  <thead class="thead-light">
     <tr>
       <th scope="col">No.</th>
       <th scope="col">Material</th>
@@ -46,6 +49,8 @@
     <% end %>
     </tbody>
 </table>
+
+<hr>
 
 <h3>Status</h3>
 <p>
@@ -67,7 +72,7 @@
 <%# The user is either admin or collecter and the status is open #%>
 <%  if (current_user.role === "user" || current_user.role === "admin") && (@list.status === 0)  %>
     <%= form_for @list, url: assign_list_path(@list.id) do |f| %>
-        <%= f.submit "Fulfil" %>
+        <%= f.submit "Fulfil" ,:class => 'btn btn-outline-info btn-lg'%>
     <% end %>
 <% end %>
 
@@ -78,7 +83,7 @@
     <%# This list belongs to the collector and the list is in progress %>
     <% if current_user.role === "user" && @list.status === 1 %>
         <%= form_for @list, url: complete_list_path(@list.id) do |f| %>
-            <%= f.submit "Complete" %>
+            <%= f.submit "Complete" ,:class => 'btn btn-outline-success btn-lg'%>
         <% end %>
     <% end %>
 <% end %>
@@ -87,10 +92,12 @@
     
 <%# Owner can delete list if it is open or completed i.e. not assigned %>
 <% if current_user.id === @list.user.id && (@list.status === 0 || @list.status === 2)  %>
-    <%= link_to "Delete", list_path(@list), method: "delete", data:{ confirm: "Are you sure?"} %>
+    <%= link_to "Delete", list_path(@list), method: "delete", data:{ confirm: "Are you sure?"},:class => 'btn btn-outline-danger' %>
 <% end %>   
 
 <%# Owner can only edit when the list is open or assigned i.e. not completed %>
 <% if current_user.id === @list.user.id && (@list.status === 0 || @list.status === 1) %>
-    <%= link_to "Edit", edit_list_path(@list) %>
+    <%= link_to "Edit", edit_list_path(@list) ,:class => 'btn btn-outline-info'%>
 <% end %>
+
+</div>

@@ -2,9 +2,9 @@
 <h1>Dashboard</h1>
 
  <div class="row">
-    <div class="col-5">
+    <div class="col-4">
 <% if @user.user_image.attached? %>
-    <%= image_tag @user.user_image :class => 'border border-dark'%>
+    <%= image_tag @user.user_image , width: "200px", height: "200px" %>
 <% else %>
     <img class="border border" src="https://files.gabbart.com/lib/common/ProfileImg.png">
 <% end %>
@@ -25,14 +25,14 @@
 <% @in_progress.each do |li| %>
     <p>Pick up address: <%= li.address %></p>
     <p>These are the items... #do a loop through the items</p>
-    <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info' %>
+    <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info mb-3' %>
 <% end %>
-
-<h3>Completed lists (<%= @completed.length %>)</h3>
+<hr>
+<h3 class="mt-3">Completed lists (<%= @completed.length %>)</h3>
 <% @completed.each do |li| %>
     <p>Pick up address: <%= li.address %></p>
     <p>These are the items... #do a loop through the items</p>
-    <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info' %>
+    <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info mb-3' %>
 <% end %>
 </div>
 </div>
