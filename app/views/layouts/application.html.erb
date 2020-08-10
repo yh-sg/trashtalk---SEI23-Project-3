@@ -31,12 +31,12 @@
         </li>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
+          <a class="nav-link" href="/">Dashboard</a>
         </li>
           </li>
-          <% if current_user.role != "user" && current_user.id === @user.id %>
+          <% if current_user.role != "user"%>
           <li class="nav-item">
-          <a class="nav-link" href="#">How it works?</a>
+          <a class="nav-link">How it works?</a>
         </li>
            <% end %>
       <% end %>
@@ -44,7 +44,7 @@
         </ul>
     </div>
     <div class="mx-auto order-0">
-        <a class="navbar-brand mx-auto" href="/">Trashtalk</a>
+        <a class="navbar-brand mx-auto">Trashtalk</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span class="navbar-toggler-icon"></span>
         </button>
