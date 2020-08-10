@@ -37,8 +37,10 @@ let removeContainer = (e) => {
     e.preventDefault(); 
     let tyContainer = e.target.parentNode
 
-    if (typesContainer.length > 1)
+    if (typesContainer.length > 1 && typeData.length === 0)
         tyContainer.parentNode.remove()
+    else if (typesContainer.length > 1 && typeData.length > 0) 
+        tyContainer.remove()
 }
 
 const generateTypeInputForm = (index, container) => {
