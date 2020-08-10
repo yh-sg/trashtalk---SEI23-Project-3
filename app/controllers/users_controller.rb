@@ -1,3 +1,6 @@
+require 'net/http'
+require "uri"
+
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:index]
@@ -6,8 +9,10 @@ class UsersController < ApplicationController
     if (current_user.role === "user") # user is a collector
 
       # show lists with accordance to distance whereby status is either open or assigned
-      @lists = List.near(current_user.address, 999999, order: 'distance', units: :km).where("STATUS != 2")
-       # >> we are going to calculate the traveling time
+      @lists = List.near(current_user.address, 999999, order: 'distance', units: :km)
+      @lists.each do |li|
+        get_travel_time(li.latitude, li.longitude)
+      end 
     else 
       # if the user is an admin/ regular user, just show all lists
       @lists = List.near(current_user.address, 999999, order: 'distance', units: :km)
@@ -41,15 +46,6 @@ class UsersController < ApplicationController
 
   end 
 
-  def new
-  end
-
-  def create
-  end
-
-  def destroy
-  end
-
   private
   
   def set_user
@@ -59,5 +55,21 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:fname, :lname, :desc, :username, :password,:email, :phone, :address, :city, :country)
   end
+
+  def get_travel_time(lat, lng)
+    url = "https://maps.googleapis.com/maps/api/distancematrix/json?"
+    uri = URI(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Post.new(uri.path, {'Content-Type' => 'application/json'})
+    request.body = "origins=#{current_user.latitude},#{current_user.longitude}&destinations=#{lat},#{lng}&key=#{ENV['GOOGLE_API_KEY']}"
+  
+    puts request.body
+    puts "#{ENV["GOOGLE_API_KEY"]}"
+    response = http.request(request)
+    body = JSON.parse(response.body)
+    puts "meow"
+    puts body
+  end 
 
 end
