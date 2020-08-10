@@ -1,7 +1,12 @@
+<div class="container mt-3">
 <h1>Dashboard</h1>
 
+ <div class="row">
+    <div class="col-4">
 <% if @user.user_image.attached? %>
     <%= image_tag @user.user_image %>
+<% else %>
+    <img src="https://files.gabbart.com/lib/common/ProfileImg.png">
 <% end %>
 
 <p> Username: <%= @user.username %></p>
@@ -13,7 +18,9 @@
 <% if current_user.role != "recycler" && current_user.id === @user.id %>
     <%= link_to "Browse lists", home_path(current_user.id) %>
 <% end %>
+</div>
 
+ <div class="col">
 <h3>Existing lists/ inprogress (<%= @in_progress.length %>)</h3>
 <% @in_progress.each do |li| %>
     <p>Pick up address: <%= li.address %></p>
@@ -27,3 +34,6 @@
     <p>These are the items... #do a loop through the items</p>
     <%= link_to "Show more", list_path(li) %>
 <% end %>
+</div>
+</div>
+</div>
