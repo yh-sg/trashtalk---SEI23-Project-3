@@ -1,5 +1,6 @@
 class Type < ApplicationRecord
-    validates :material, presence: true, length: {minimum: 5}
+    belongs_to :list
+    
     validates :remarks, presence: true, length: {minimum: 3}
     validates :weight, presence: true, length: {minimum: 1}
 end

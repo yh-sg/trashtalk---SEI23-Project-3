@@ -1,21 +1,4 @@
 <h1>Lists#new</h1>
 <p>Find me in app/views/lists/new.html.erb</p>
 
-<%= form_for @list do |f| %>
-    <div>
-        <%= f.label :address %>
-        <%= f.text_field :address %>
-    </div>
-
-    <div>
-        <%= f.label :pickUpDate %>
-        <%= f.text_field :pickUpDate %>
-    </div>
-
-    <div>
-        <%= f.label :remarks %>
-        <%= f.text_field :remarks %>
-    </div>
-
-    <div><%= f.submit %></div>
-<% end %>
+<%= render "lists/form" %>

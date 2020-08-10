@@ -1,9 +1,11 @@
 class ListsController < ApplicationController
+  before_action :authenticate_user!
   def index
   end
 
   def new
     @list = List.new
+    type = @list.types.build
   end
 
   def create 
@@ -12,14 +14,23 @@ class ListsController < ApplicationController
     @list.user = current_user
 
     if @list.save
-      redirect_to root_path
+      redirect_to user_path(current_user.id)
     else 
       render :new
     end 
   end 
 
-  def show
+  def edit 
     @list = List.find(params[:id])
+  end 
+
+  def show # individual List pages
+    @list = List.find(params[:id])
+
+    if @list.collector != nil # if the list is being collected
+      # we find the name and display it
+      @assigned = User.find(@list.collector).username
+    end 
   end
 
   def assign # the collector has clicked to assign this task to themselves
@@ -27,7 +38,7 @@ class ListsController < ApplicationController
     list.collector = current_user.id
     list.update(status: 1) # 0 - unfulfilled, 1 - doing, 2 - done
     if list.save 
-      redirect_to root_path
+      redirect_to user_path(current_user.id)
     end
   end 
 
@@ -35,15 +46,14 @@ class ListsController < ApplicationController
     list = List.find(params[:id])
     list.update(status: 2) 
     if list.save 
-      redirect_to root_path
+      redirect_to user_path(current_user.id)
     end 
   end 
 
   private
   
   def list_params
-    # for now, the permitted format for date is yyyy-mm-dd
-    params.require(:list).permit(:address, :pickUpDate, :remarks)
+    params.require(:list).permit(:address, :pickUpDate, :remarks, types_attributes: [:material, :remarks, :weight])
   end
 
 end
