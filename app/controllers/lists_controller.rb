@@ -66,6 +66,18 @@ class ListsController < ApplicationController
     end 
   end 
 
+  def destroy 
+    # delete all dependencies
+    List.find(params[:id]).types.each do |type|
+      type.destroy
+    end 
+
+    # delete the lists
+    if List.find(params[:id]).destroy
+      redirect_to user_path(current_user.id)
+    end
+  end 
+
   private
   
   def list_params
