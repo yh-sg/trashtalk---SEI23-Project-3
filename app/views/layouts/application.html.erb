@@ -1,79 +1,79 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Trashtalk</title>
+    <title>Trashtalks | Connect with a nearby recycling agent today</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css2?family=Arbutus+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
     <% if notice %>
-      <p class="alert alert-success notice"><%= notice %></p>
+      <p class="alert alert-success notice mb-0"><%= notice %></p>
     <% end %>
-
     <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
+      <p class="alert alert-danger mb-0"><%= alert %></p>
     <% end %>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                    <% if user_signed_in? %>
-          <li class="nav-item">
-          <a class="nav-link">Welcome!</a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
-        </li>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
-        </li>
-          </li>
-          <%# if current_user.role != "user" && current_user.id === @user.id %>
-          <li class="nav-item">
-          <a class="nav-link" href="#">How it works?</a>
-        </li>
-           <%# end %>
-      <% end %>
-
-        </ul>
+    <div class="navbar top-bar">
+        <div><%= link_to "#Trashtalks", root_path, class: "brand ml-2" %></div>
+        <a href="https://github.com/yh-sg/trashtalks" target="blank"><i class="fa fa-github git mr-2" style="font-size: 24px;"></i></a>
     </div>
-    <div class="mx-auto order-0">
-        <a class="navbar-brand mx-auto" href="/">Trashtalk</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul class="navbar-nav ml-auto">
+
     <% if user_signed_in? %>
-    <li class="nav-item">
-      <%= link_to user_path(current_user.id) do %>
-        </li>
+    <div class="d-flex flex-row-reverse mt-4 mr-5">
+      <div class="dropdown show">
+        <% if current_user.role === "user"%>
+        <a class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Collector
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+          <%= link_to "Dashboard", user_path(current_user.id), class: "dropdown-item" %>
+          <%= link_to "Browse lists", home_path(current_user.id), class: "dropdown-item" %>
+          <div class="dropdown-divider"></div>
+          <%= link_to  "Logout", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
+        </div>
+        <% elsif %>
+        <a class="dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-transform:capitalize;">
+          <%= current_user.role %>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+          <%= link_to "Dashboard", user_path(current_user.id), class: "dropdown-item" %>
+          <%= link_to "How It Works", intro_show_path, class: "dropdown-item" %>
+          <div class="dropdown-divider"></div>
+          <%= link_to  "Logout", destroy_user_session_path, method: :delete, class:"dropdown-item" %>
+        </div>
+        <% end %>
+      </div>
+      <span class="badge pill badge-user mr-3">
+        <%= current_user.username %>
+      </span>
+        <% else %>
+        <div class="navbar second-nav">
+          <ul class="breadcrumb second-bread mx-auto">
+            <li><%= link_to "Log In", new_user_session_path, class: "bread-item mr-4" %></li>
+            <span class="mr-4">|</span>
+            <%= link_to "How It Works", intro_show_path, class: "bread-item" %>
+          </ul>
+        </div>
       <% end %>
-      <li class="nav-item mx-3">
-      <%= link_to  "Edit Profile", edit_user_registration_path %>
-      </li>
-      <li class="nav-item">
-      <%= link_to  "Logout", destroy_user_session_path, method: :delete %>
-      </li>    
-    <% else %>
-    <li class="nav-item mx-3">
-      <%= link_to  "Sign up", new_user_registration_path %>
-      </li>
-    <li class="nav-item">
-      <%= link_to  "Sign In", new_user_session_path %>
-      </li>
-    <% end %>
-        </ul>
     </div>
-</nav>
-
+    <!-- <li><%= link_to "Sign Up", new_user_registration_path, class: "bread-item mr-4" %></li>
+        <span class="mr-4">|</span> -->
     <%= yield %>
+    <footer>
+      <div class="container footer">
+        <div class="row justify-content-md-center">
+          <div class="col-sm-3 text-center my-2">
+            &copy; <strong>YAME</strong> 2020.<br>
+            All Rights Reserved.
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   </body>
 </html>

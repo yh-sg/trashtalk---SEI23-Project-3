@@ -1,29 +1,39 @@
+<div class="container mt-3" style="height: 100vh;">
 <h1>Dashboard</h1>
 
+ <div class="row">
+    <div class="col-5">
 <% if @user.user_image.attached? %>
-    <%= image_tag @user.user_image %>
+    <%= image_tag @user.user_image :class => 'border border-dark'%>
+<% else %>
+    <img class="border border" src="https://files.gabbart.com/lib/common/ProfileImg.png">
 <% end %>
 
 <p> Username: <%= @user.username %></p>
 <% if current_user.role != "user" && current_user.id === @user.id %>
-    <%= link_to "Create new lists", new_list_path %>
-    <%= link_to "Browse lists", home_path(current_user.id) %>
+    <%= link_to "Create new lists", new_list_path , :class => 'btn btn-outline-success'%> <br>
+    <%= link_to "Browse lists", home_path(current_user.id) , :class => 'btn btn-outline-info mt-2' %>
 <% end %>
 
 <% if current_user.role != "recycler" && current_user.id === @user.id %>
-    <%= link_to "Browse lists", home_path(current_user.id) %>
+    <%= link_to "Browse lists", home_path(current_user.id) , :class => 'btn btn-outline-info' %>
 <% end %>
+</div>
 
+ <div class="col">
 <h3>Existing lists/ inprogress (<%= @in_progress.length %>)</h3>
 <% @in_progress.each do |li| %>
     <p>Pick up address: <%= li.address %></p>
     <p>These are the items... #do a loop through the items</p>
-    <%= link_to "Show more", list_path(li) %>
+    <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info' %>
 <% end %>
 
 <h3>Completed lists (<%= @completed.length %>)</h3>
 <% @completed.each do |li| %>
     <p>Pick up address: <%= li.address %></p>
     <p>These are the items... #do a loop through the items</p>
-    <%= link_to "Show more", list_path(li) %>
+    <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info' %>
 <% end %>
+</div>
+</div>
+</div>
