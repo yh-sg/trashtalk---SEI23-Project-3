@@ -16,6 +16,7 @@ const generateDomElement = (type, className = null) => {
     return element;
 }
 
+// event handler for RemoveBtn
 let removeContainer = (e) => { 
     // prevent the form from being submitted
     e.preventDefault(); 
@@ -97,6 +98,7 @@ const generateTypeInputForm = (index) => {
     const removeBtn = generateDomElement("button")
     removeBtn.textContent = "Remove"
     removeBtn.addEventListener('click', removeContainer)
+    // end remove button
 
     materialInputContainerEl.appendChild(weightContainerEl);
     typeInputContainerEl.appendChild(removeBtn)
