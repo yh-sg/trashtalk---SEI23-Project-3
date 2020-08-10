@@ -1,6 +1,9 @@
 <div class="container mt-3">
-
+ <% if current_user.role === "user"%>
 <h1 class="text-center">Browse List</h1>
+<% else %>
+<h1 class="text-center">See what others are recycling</h1>
+<% end %>
 
 <div>
 <% if current_user.role != "user" %>
@@ -9,15 +12,20 @@
 </div>
 
   <div class="row">
-    <div class="col border">
-            <strong>MAP for Metilda</strong>
+    <div class="col border mb-5 mt-5">
+            <strong class="text-center">MAP</strong>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
     </div>
   </div>
 
 <% @lists.in_groups_of(4, false).each do |group| %>
      <div class="row">
      <% group.each do |list| %>
-    <div class="col-md-3">
+    <div class="col-md-3 col-md-offset-2 border">
         <p>Place: <%= list.address %><p>
         <p>Place: <%= list.pickUpDate %><p>
         <% sum = 0 %>
