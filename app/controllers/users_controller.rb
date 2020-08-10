@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       # show lists with accordance to distance whereby status is either open or assigned
       @lists = List.near(current_user.address, 999999, order: 'distance', units: :km)
       @lists.each do |li|
-        get_travel_time(li.latitude, li.longitude)
+        puts get_travel_time(li.latitude, li.longitude)
       end 
     else 
       # if the user is an admin/ regular user, just show all lists
@@ -57,19 +57,12 @@ class UsersController < ApplicationController
   end
 
   def get_travel_time(lat, lng)
-    url = "https://maps.googleapis.com/maps/api/distancematrix/json?"
-    uri = URI(url)
+    uri = URI.parse("https://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_user.latitude},#{current_user.longitude}&destinations=#{lat},#{lng}&key=#{ENV['GOOGLE_API_KEY']}")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    request = Net::HTTP::Post.new(uri.path, {'Content-Type' => 'application/json'})
-    request.body = "origins=#{current_user.latitude},#{current_user.longitude}&destinations=#{lat},#{lng}&key=#{ENV['GOOGLE_API_KEY']}"
-  
-    puts request.body
-    puts "#{ENV["GOOGLE_API_KEY"]}"
-    response = http.request(request)
-    body = JSON.parse(response.body)
-    puts "meow"
-    puts body
+    req = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(req)
+    return response.body
   end 
 
 end
