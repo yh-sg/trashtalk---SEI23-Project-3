@@ -20,6 +20,10 @@ class ListsController < ApplicationController
     end 
   end 
 
+  def edit 
+    @list = List.find(params[:id])
+  end 
+
   def show # individual List pages
     @list = List.find(params[:id])
 

@@ -6,8 +6,32 @@
     <% end %>
 </p>
 <p>Pick up address: <%= @list.address %></p>
-<p>These are the items... #do a loop through the items</p>
+<p>Pick up date: <%= @list.pickUpDate.to_s %></p>
+<p>Created at: <%= @list.created_at.to_date %>, <%= time_ago_in_words(@list.created_at) %> ago</p>
+<p>Remarks: <%= @list.remarks %></p>
 
+<h3>Items in this list </h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">Material</th>
+      <th scope="col">Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @list.types.each_with_index do |type, idx|%>
+        <tr>
+            <th scope="row"><%= idx + 1 %></th>
+            <td><%= type.material %></td>
+            <td><%= type.remarks %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
+
+<h3>Status</h3>
 <p>
     <% if @list.status == 0 %>
         This list is open
@@ -36,7 +60,7 @@
     <p>This list belongs to you</p> <%# For now.. We display the same message for all %>
 
     <%# This list belongs to the collector and the list is in progress %>
-    <% if (current_user.role === "user") && @list.status === 1 %>
+    <% if current_user.role === "user" && @list.status === 1 %>
         <%= form_for @list, url: complete_list_path(@list.id) do |f| %>
             <%= f.submit "Complete" %>
         <% end %>
@@ -46,4 +70,5 @@
 <%# The user can edit and destroy their own lists #%>
 <% if current_user.id === @list.user.id %>
     <%= link_to "Delete", list_path(@list), method: "delete", data:{ confirm: "Are you sure?"} %>
+    <%= link_to "Edit", edit_list_path(@list) %>
 <% end %>   

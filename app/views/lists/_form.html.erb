@@ -1,0 +1,33 @@
+<% if @list.errors.any? %>
+    <%= pluralize(@list.errors.count, "error") %>
+    <% @list.errors.full_messages.each do |err| %>
+        <div> 
+            <%= err %>
+        </div>
+    <% end %>
+<% end %>
+
+<%= form_for @list do |f| %>
+    <div>
+        <%= f.label :address %>
+        <%= f.text_field :address %>
+    </div>
+
+    <div>
+        <%= f.label :pickUpDate %>
+        <%= f.date_field :pickUpDate %>
+    </div>
+
+    <div>
+        <%= f.label :remarks %>
+        <%= f.text_field :remarks %>
+    </div>
+
+    <h3>Items</h3>
+    <button id="addItemToList"> Add new item</button>
+    <div class="TypesContainer" ></div>
+
+    <div><%= f.submit %></div>
+
+    <%= javascript_pack_tag 'addTypeToList' %>
+<% end %>
