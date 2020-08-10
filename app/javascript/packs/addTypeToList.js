@@ -141,7 +141,7 @@ const generateTypeInputForm = (index, container) => {
 
 addItemButton.addEventListener("click", (e)=>{
     e.preventDefault();
-    const container = generateDomElement("div")
+    const container = generateDomElement("div", "TypesContainer")
     generateTypeInputForm(listItemIdx++, container);
 })
 
