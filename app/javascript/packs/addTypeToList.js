@@ -5,6 +5,8 @@ let typeData = []
 
 // get all the containers with the same class
 const typesContainer = document.getElementsByClassName("TypesContainer")
+const createListBtn = document.getElementsByName("commit")
+console.log(createListBtn)
 
 // For edit form ===> We append all the data
 // we need to add an if else for new form
@@ -35,9 +37,8 @@ let removeContainer = (e) => {
     e.preventDefault(); 
     let tyContainer = e.target.parentNode
 
-    // only when the current items list have more than 1 item, that we allow deletion of items
-    if (tyContainer.parentNode.childElementCount > 1 ) 
-        tyContainer.parentNode.removeChild(tyContainer)
+    if (typesContainer.length > 1)
+        tyContainer.parentNode.remove()
 }
 
 const generateTypeInputForm = (index, container) => {
@@ -63,13 +64,21 @@ const generateTypeInputForm = (index, container) => {
     
     }
 
-    let checkedButton = materials.indexOf(typeData[index].material)
-    if (checkedButton === 1)
-        materialInputContainerEl.childNodes[2].checked = true 
-    else if (checkedButton === 2) 
-        materialInputContainerEl.childNodes[4].checked = true
-    else 
+    if (typeData.length != 0) {
+        let checkedButton = 0
+        if (typeData[index] !== undefined) 
+            checkedButton = materials.indexOf(typeData[index].material)
+        
+        if (checkedButton === 1)
+            materialInputContainerEl.childNodes[2].checked = true 
+        else if (checkedButton === 2) 
+            materialInputContainerEl.childNodes[4].checked = true
+        else 
+            materialInputContainerEl.childNodes[0].checked = true 
+    }
+    else {
         materialInputContainerEl.childNodes[0].checked = true 
+    }
 
     typeInputContainerEl.appendChild(materialInputContainerEl);
 
@@ -83,8 +92,8 @@ const generateTypeInputForm = (index, container) => {
 
     const remarkInputEl = generateDomElement("input");
 
-    // >>> For edit form 
-    remarkInputEl.value = typeData[index].remarks != undefined ? typeData[index].remarks : ""
+    // >>> For edit form
+    remarkInputEl.value = typeData[index] != undefined ? typeData[index].remarks : ""
     // end for edit form
 
     remarkInputEl.type = "text"
@@ -110,7 +119,7 @@ const generateTypeInputForm = (index, container) => {
     weightInputEl.max="10"
 
     // >>> for Edit form 
-    weightInputEl.value = typeData[index].weight != undefined ? typeData[index].weight : 0
+    weightInputEl.value = typeData[index] != undefined ? typeData[index].weight : 0
     // end edit form 
     
     weightContainerEl.appendChild(weightInputEl);
@@ -124,13 +133,16 @@ const generateTypeInputForm = (index, container) => {
     materialInputContainerEl.appendChild(weightContainerEl);
     typeInputContainerEl.appendChild(removeBtn)
     
-    // typesContainer.appendChild(typeInputContainerEl);
-    container.appendChild(typeInputContainerEl)
+    if (container != undefined) {
+        container.appendChild(typeInputContainerEl)
+
+    }
 }
 
 addItemButton.addEventListener("click", (e)=>{
     e.preventDefault();
-    generateTypeInputForm(listItemIdx++);
+    const container = generateDomElement("div")
+    generateTypeInputForm(listItemIdx++, container);
 })
 
 for (let i = 0; i < typesContainer.length; i++) {
