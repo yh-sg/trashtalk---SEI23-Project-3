@@ -10,12 +10,19 @@ class UsersController < ApplicationController
 
       # show lists with accordance to distance whereby status is either open or assigned
       @lists = List.near(current_user.address, 999999, order: 'distance', units: :km)
+      
+
+      # I want to get all the List relative to distance from the current user
       @lists.each do |li|
-        puts get_travel_time(li.latitude, li.longitude)
+        get_travel_time(li.latitude, li.longitude)
       end 
     else 
       # if the user is an admin/ regular user, just show all lists
       @lists = List.near(current_user.address, 999999, order: 'distance', units: :km)
+
+      @lists.each do |li|
+        puts get_travel_time(li.latitude, li.longitude)
+      end 
     end
   end
 
@@ -57,6 +64,7 @@ class UsersController < ApplicationController
   end
 
   def get_travel_time(lat, lng)
+    puts "google"
     uri = URI.parse("https://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_user.latitude},#{current_user.longitude}&destinations=#{lat},#{lng}&key=#{ENV['GOOGLE_API_KEY']}")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
