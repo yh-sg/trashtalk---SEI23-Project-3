@@ -13,62 +13,58 @@
 <div class="row">
     <div class="col-5">
 
-    <% if @user.user_image.attached? %>
-        <%= image_tag @user.user_image, width: "200px", height: "200px"  %>
-    <% else %>
-        <img class="border border" src="https://files.gabbart.com/lib/common/ProfileImg.png">
-    <% end %>
-
-    <div>
-    <%= current_user.username %>
-    </div>
-
-    <div>
-        <%= link_to user_path(current_user.id) do %>
-            <strong class="btn btn-outline-info mt-3">User Information</strong>
-        <% end %>
-    </div>
-    <div>
-        <% if current_user.role != "user" %>
-            <%= link_to "Create new lists", new_list_path , :class => 'btn btn-outline-success mt-2'%>
-        <% end %>
-    </div>
-</div>
-
-<div style='width: 800px;'>  
-  <div id="map" style='width: 800px; height: 400px;'></div>  
-</div>
-
-  <%= current_user.address %>
-<div class="col">
-    <%= content_tag :div, class: "lists", data: { lists: @lists } do %>
-    <% end %>
-<% @lists.each_with_index do |list, idx| %>
-
-    <div>
-        <p>Place: <%= list.address %><p>
-        <p>Place: <%= list.pickUpDate %><p>
-        <p>Distance from you <%= list.travel_distance %></p>
-        <% if current_user.role === "user" %>
-            <p> Approximately: <%= list.travel_time %></p>
-        <% end %>
-
-        <% sum = 0 %>
-        <% list.types.each do |ele| %>
-            <% sum = sum + ele.weight %>
-        <% end %>
-        <p>Weight: <%= sum %> KG</p>
-
-        <% if list.status === 0 %>
-            <p>Status: Open</p>
-        <% elsif list.status === 1 %>
-            <p>Status: Assigned</p>
+        <% if @user.user_image.attached? %>
+            <%= image_tag @user.user_image, width: "200px", height: "200px"  %>
         <% else %>
-            <p>Status: Completed</p>
+            <img class="border border" src="https://files.gabbart.com/lib/common/ProfileImg.png">
         <% end %>
-        <p><%= link_to "Show more", list_path(list) %></p>
 
+        <div><%= current_user.username %></div>
+
+        <div>
+            <%= link_to user_path(current_user.id) do %>
+                <strong class="btn btn-outline-info mt-3">User Information</strong>
+            <% end %>
+        </div>
+        <div>
+            <% if current_user.role != "user" %>
+                <%= link_to "Create new lists", new_list_path , :class => 'btn btn-outline-success mt-2'%>
+            <% end %>
+        </div>
     </div>
+    <div class="col">
+        <div style='width: 800px;'>  
+            <div id="map" style='width: 100%; height: 400px;'></div>  
+        </div>
+
+        <%= content_tag :div, class: "lists", data: { lists: @lists } do %>
+        <% end %>
+        <% @lists.each_with_index do |list, idx| %>
+
+        <div>
+            <p>Place: <%= list.address %><p>
+            <p>Place: <%= list.pickUpDate %><p>
+            <p>Distance from you <%= list.travel_distance %></p>
+            <% if current_user.role === "user" %>
+                <p> Approximately: <%= list.travel_time %></p>
+            <% end %>
+
+            <% sum = 0 %>
+            <% list.types.each do |ele| %>
+                <% sum = sum + ele.weight %>
+            <% end %>
+            <p>Weight: <%= sum %> KG</p>
+
+            <% if list.status === 0 %>
+                <p>Status: Open</p>
+            <% elsif list.status === 1 %>
+                <p>Status: Assigned</p>
+            <% else %>
+                <p>Status: Completed</p>
+            <% end %>
+            <p><%= link_to "Show more", list_path(list) %></p>
+
+        </div>
 <% end %> 
 
 <% if @lists.length === 0 %>
