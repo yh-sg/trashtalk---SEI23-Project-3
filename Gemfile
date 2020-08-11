@@ -13,7 +13,15 @@ gem 'devise'
 
 # for date formatting
 gem 'momentjs-rails', '>= 2.9.0'
+
+# for geocoding
+gem 'geocoder'
+gem 'gmaps4rails'
 # Use Puma as the app server
+
+# social media sharing
+# gem 'social-share-button'
+gem 'shareable'
 
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets

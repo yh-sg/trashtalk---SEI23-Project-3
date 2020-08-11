@@ -1,0 +1,26 @@
+<% users.each do |u| %>
+
+<div>
+    <div>Username: <%= u.username %></div>
+    <div>Role: <%= u.role %></div>
+    <div class="mt-1 mb-1"> Change role
+    </div>
+        <button class="btn btn-outline-primary" data-userid="<%= u.id %>" data-role="recycler" onclick="changeRole(this)"> Recycler </button>
+        <button class="btn btn-outline-primary" data-userid="<%= u.id %>" data-role="user" onclick="changeRole(this)"> User </button>
+        <button class="btn btn-outline-primary" data-userid="<%= u.id %>" data-role="admin" onclick="changeRole(this)"> Admin </button>
+</div>
+<hr>
+<% end %>
+
+<script type="text/javascript">
+  const changeRole =(e)=>{ 
+    fetch(`/users/${e.getAttribute("data-userid")}/role`,{
+        method: "PATCH",
+            headers: {
+    'X-CSRF-Token' :document.head.querySelector('meta[name="csrf-token"]').content,
+    'Content-Type': 'application/json'
+    },
+        body: JSON.stringify({role:e.getAttribute("data-role")})
+    })
+  }
+</script>
