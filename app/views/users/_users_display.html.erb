@@ -3,13 +3,13 @@
 <div>
     <div>Username: <%= u.username %></div>
     <div>Role: <%= u.role %></div>
-    <div> Change role
+    <div class="mt-1 mb-1"> Change role
     </div>
-        <button data-userid="<%= u.id %>" data-role="recycler" onclick="changeRole(this)"> Recycler </button>
-        <button data-userid="<%= u.id %>" data-role="user" onclick="changeRole(this)"> User </button>
-        <button data-userid="<%= u.id %>" data-role="admin" onclick="changeRole(this)"> Admin </button>
+        <button class="btn btn-outline-primary" data-userid="<%= u.id %>" data-role="recycler" onclick="changeRole(this)"> Recycler </button>
+        <button class="btn btn-outline-primary" data-userid="<%= u.id %>" data-role="user" onclick="changeRole(this)"> User </button>
+        <button class="btn btn-outline-primary" data-userid="<%= u.id %>" data-role="admin" onclick="changeRole(this)"> Admin </button>
 </div>
-
+<hr>
 <% end %>
 
 <script type="text/javascript">
