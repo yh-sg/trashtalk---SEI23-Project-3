@@ -13,6 +13,10 @@ gem 'devise'
 
 # for date formatting
 gem 'momentjs-rails', '>= 2.9.0'
+
+# for geocoding
+gem 'geocoder'
+gem 'gmaps4rails'
 # Use Puma as the app server
 
 gem 'puma', '~> 4.1'
