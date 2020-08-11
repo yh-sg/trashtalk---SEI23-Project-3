@@ -3,7 +3,7 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
     
-    <div class="col-md-7 mx-auto">
+    <div class="col-lg-6 mx-auto">
       <div class="row mt-4">
         <div class="col">
           <%= f.text_field :username, autofocus: true , placeholder: "Username" , :class => 'form-control'%>
