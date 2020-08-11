@@ -4,23 +4,20 @@
 <%= link_to "Add Types", new_type_path %>
 <table class="table mt-4">
 <tr>
-    <td>ID</td>
+    <td>Edit</td>
     <td>Material</td>
     <td>Remarks</td>
     <td>Weight</td>
-    <td>Actions</td>
+    <td>Updated Date</td>
 </tr>
 
 <% @types.each do |type| %>
 <tr>
-    <td><%= link_to type.id, type_path(type.id) %></td>
+    <td><%= link_to type.id, edit_type_path(type.id) %></td>
     <td><%= type.material.split('"')[1] %></td>
     <td><%= type.remarks %></td>
     <td><%= type.weight %>kg</td>
-    <td>
-        <%= link_to "Edit", edit_type_path(type)%>
-        <%= link_to "Delete", type_path(type), method: "delete", data:{ confirm: "Are you sure?"}%>
-    </td>
+    <td><%= type.updated_at_was.strftime("%Y-%m-%d")%></td>
 </tr>
 
 <% end %>
