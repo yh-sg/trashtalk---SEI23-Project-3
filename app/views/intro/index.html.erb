@@ -15,24 +15,36 @@
 <div class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <%= image_tag('/collector-recycler.png', width: "60%", height: "auto", class: "mx-auto") %>
         <div class="row">
             <div class="col-sm-6 text-center">
-            <p><strong>Register as a Collector</strong></p>
-             Do you want to contribute to the cause? Join here as a recycler!
+                <%= image_tag('/collector.png', width: "41%", height: "auto", class: "mx-auto") %>
+                <p><strong>Register as a Collector</strong></p>
+                <hr class="hr-box">
+                <p>Interested in contributing to a recycling economy?</p>
+               <div class="text-left pl-5">
+                    <i class="fa fa-check-square" style="color:#fe5000;"></i> Own a Hand Truck <br>
+                    <i class="fa fa-check-square" style="color:#fe5000;"></i> Extensive Benefits
+                </div>
             </div>
             <div class="col-sm-6 text-center">
-            <p><strong>Register as a Recycler</strong></p>
-             Are you a collector of unused items and would like to earn more gains? Join us as a collector!
+                <%= image_tag('/recycler.png', width: "30%", height: "auto", class: "mx-auto") %>
+                <p><strong>Register as a Recycler</strong></p>
+                <hr class="hr-box">
+                <p>Want to trade cash for trash?</p>
+                <div class="text-left pl-5">
+                    <i class="fa fa-check-square" style="color:#fe5000;"></i> Accept Used Items <br>
+                    <i class="fa fa-check-square" style="color:#fe5000;"></i> Good Rates <br>
+                    <i class="fa fa-check-square" style="color:#fe5000;"></i> Doorstep Collection
+                </div>
             </div>
         </div>
+        <%= link_to "Start Recycling", new_user_registration_path, class: "button-start mx-auto mt-4 mb-0" %>
     </div>
 </div>
 
 <script>
     var button = document.querySelector('.button-box');
     button.addEventListener("click", function(e) {
-      //alert("works");
       document.querySelector(".modal").style.display = "block";
 
       //when 'x' is clicked, modal box disappears
