@@ -1,9 +1,9 @@
 <h3><%= title %> (<%= lists.length%>)</h3>
 
-<div style="display: flex; flex-direction: row;">
+<div>
     <% lists.each do |li| %>
-        <div style="width: 200px;">
-            <p><%= li.address %></p>
+        <div>
+            <p>Pick up address: <%= li.address %></p>
             <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info mb-3' %>
             <hr>
         </div>
