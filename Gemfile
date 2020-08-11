@@ -19,6 +19,9 @@ gem 'geocoder'
 gem 'gmaps4rails'
 # Use Puma as the app server
 
+# social media sharing
+gem 'social-share-button'
+
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
