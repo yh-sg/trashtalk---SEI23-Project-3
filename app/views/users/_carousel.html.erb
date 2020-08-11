@@ -7,6 +7,13 @@
           <% lists.each do |li| %>
             <li class="glide__slide">
                 <div style="width: 200px;">
+                    <% if li.status === 0 %>
+                        <span class="badge badge-success">Open</span>
+                    <% elsif li.status === 1 %>
+                        <span class="badge badge-info">Assigned</span>
+                    <% else %>
+                        <span class="badge badge-secondary">Completed</span>
+                    <% end %>
                     <p><%= li.address %></p>
                     <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info mb-3' %>
                 </div>
