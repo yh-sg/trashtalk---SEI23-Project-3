@@ -17,18 +17,13 @@ class UsersController < ApplicationController
         details = get_travel_time(li.latitude, li.longitude)
         li.travel_distance = details["distance"]["text"]
         li.travel_time = details["duration"]["text"]
-      end 
-    else 
-      # if the user is an admin/ regular user, just show all lists
+      end
+    else # user is recycler or admin
       @lists = List.near(current_user.address, 999999, order: 'distance', units: :km)
 
       @lists.each do |li|
-        def li.travel_distance
-          "10"
-        end 
-        def li.travel_duration
-          "100"
-        end 
+        details = get_travel_time(li.latitude, li.longitude)
+        li.travel_distance = details["distance"]["text"]
       end 
     end
   end
@@ -70,8 +65,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(:fname, :lname, :desc, :username, :password,:email, :phone, :address, :city, :country)
   end
 
+  # @params: destination lat and lng
   def get_travel_time(lat, lng)
-    puts "google"
     uri = URI.parse("https://maps.googleapis.com/maps/api/distancematrix/json?origins=#{current_user.latitude},#{current_user.longitude}&destinations=#{lat},#{lng}&key=#{ENV['GOOGLE_API_KEY']}")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
