@@ -1,6 +1,11 @@
 <h3><%= title %> (<%= lists.length%>)</h3>
-<% lists.each do |li| %>
-    <p>Pick up address: <%= li.address %></p>
-    <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info mb-3' %>
-    <hr>
-<% end %>
+
+<div>
+    <% lists.each do |li| %>
+        <div>
+            <p>Pick up address: <%= li.address %></p>
+            <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info mb-3' %>
+            <hr>
+        </div>
+    <% end %>
+</div>

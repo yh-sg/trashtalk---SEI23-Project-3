@@ -3,26 +3,30 @@
      <% group.each do |list| %>
 
     <div class="col-md-3 col-md-offset-2 border p-3 mt-1">
-        <p>Place: <%= list.address %><p>
-        <p>Date: <%= list.pickUpDate %><p>
-        <p>Distance: <%= list.travel_distance %></p>
-        <% if current_user.role === "user" %>
-            <p>Approximately: <%= list.travel_time %></p>
-        <% end %>
-        <% sum = 0 %>
-        <% list.types.each do |ele| %>
-            <% sum = sum + ele.weight %>
-        <% end %>
-        <p>Weight: <%= sum %> KG</p>
-
         <% if list.status === 0 %>
-            <p>Status: Open</p>
+            <p class="float-right badge badge-success">Open</p>
         <% elsif list.status === 1 %>
-            <p>Status: Assigned</p>
+            <p class="float-right badge badge-info">Assigned</p>
         <% else %>
-            <p>Status: Completed</p>
+            <p class="float-right badge badge-secondary">Completed</p>
         <% end %>
-        <p><%= link_to "Show more", list_path(list) %></p>
+
+        <div style="margin-top: auto; margin-bottom: auto;" class="mx-auto">
+            <p><%= list.address %><p>
+            <p>Date: <%= list.pickUpDate %><p>
+            <p>Distance: <%= list.travel_distance %></p>
+            <% if current_user.role === "user" %>
+                <p>Approximately: <%= list.travel_time %></p>
+            <% end %>
+            <% sum = 0 %>
+            <% list.types.each do |ele| %>
+                <% sum = sum + ele.weight %>
+            <% end %>
+            <p>Weight: <%= sum %> kg</p>
+            <p style="display: block; margin: auto; width: fit-content;">
+            <%= link_to "Show more", list_path(list), :class => 'mx-auto btn btn-outline-info mb-3' %>
+            </p>
+        </div>
     </div>
 <% end %> 
 </div>
