@@ -5,6 +5,8 @@
 
 //= require moment
 //= require("bootstrap-datetimepicker.js")
+//= require underscore
+//= require gmaps/google
 import 'bootstrap'
 require("@rails/ujs").start()
 require("turbolinks").start()
