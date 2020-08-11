@@ -41,7 +41,10 @@
 
   <%= current_user.address %>
 <div class="col">
+    <%= content_tag :div, class: "lists", data: { lists: @lists } do %>
+    <% end %>
 <% @lists.each_with_index do |list, idx| %>
+
     <div>
         <p>Place: <%= list.address %><p>
         <p>Place: <%= list.pickUpDate %><p>
@@ -72,25 +75,8 @@
     <p>There are no lists.</p>
 <% end %>
 
-    <script type="text/javascript">  
-        handler = Gmaps.build('Google');  
-        handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){  
-            
-            markers = handler.addMarkers([  
-                {  
-                "lat": 1.3521,  
-                "lng": 103.8198,  
-                "picture": {  
-                    "width":  32,  
-                    "height": 32  
-                },
-                "infowindow": "SJSU"  
-                }  
-            ]);  
-            handler.bounds.extendWith(markers);  
-            handler.fitMapToBounds();  
-        });  
-    </script>
+<%= javascript_pack_tag 'map' %>
+
 </div>
 </div>
 </div>
