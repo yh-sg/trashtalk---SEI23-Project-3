@@ -3,7 +3,7 @@
      <% group.each do |list| %>
     <div class="col-md-3 col-md-offset-2 border">
         <p>Place: <%= list.address %><p>
-        <p>Place: <%= list.pickUpDate %><p>
+        <p>Date: <%= list.pickUpDate %><p>
         <% sum = 0 %>
         <% list.types.each do |ele| %>
             <% sum = sum + ele.weight %>
