@@ -2,9 +2,9 @@
 <h1>Dashboard</h1>
 
  <div class="row">
-    <div class="col-5">
+    <div class="col-4">
 <% if @user.user_image.attached? %>
-    <%= image_tag @user.user_image, width: "200px", height: "200px"  %>
+    <%= image_tag @user.user_image , width: "200px", height: "200px" %>
 <% else %>
     <img class="border border" src="https://files.gabbart.com/lib/common/ProfileImg.png">
 <% end %>
@@ -21,19 +21,33 @@
 </div>
 
  <div class="col">
-<h3>Existing lists/ inprogress (<%= @in_progress.length %>)</h3>
-<% @in_progress.each do |li| %>
-    <p>Pick up address: <%= li.address %></p>
-    <p>These are the items... #do a loop through the items</p>
-    <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info' %>
-<% end %>
 
-<h3>Completed lists (<%= @completed.length %>)</h3>
-<% @completed.each do |li| %>
-    <p>Pick up address: <%= li.address %></p>
-    <p>These are the items... #do a loop through the items</p>
-    <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info' %>
-<% end %>
+ <% if current_user.role != "admin" %>
+ <%= render partial: 'lists_display', locals: {title: "Existing lists/ inprogress", lists:@in_progress} %>
+ <%= render partial: 'lists_display', locals: {title: "Completed lists", lists:@completed} %>
+
+<% else %>
+
+<a class="button default ok" href="#users-information" data-toggle="collapse" aria-expanded="false">
+   <h2>
+       View Users   
+   </h2>
+</a>
+<div id="users-information" class="collapse">
+ <%= render partial: 'users_display', locals: {users:@users} %>
+</div>
+
+<a class="button default ok" href="#lists-information" data-toggle="collapse" aria-expanded="false">
+   <h2>
+       View Lists   
+   </h2>
+</a>
+<div id="lists-information" class="collapse">
+ <%= render partial: 'lists_display', locals: {title: "Existing lists/ inprogress", lists:@in_progress} %>
+ <%= render partial: 'lists_display', locals: {title: "Completed lists", lists:@completed} %>
+</div>
+
+ <% end %>
 </div>
 </div>
 </div>

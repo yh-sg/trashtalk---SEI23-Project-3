@@ -7,7 +7,52 @@
         </div>
         <div class="col-sm-12 mx-auto text-center mb-5">
             An app that connects you with recycling agents<br>to help you reduce your trash.
-            <a href="#" class="start">Find out more.</a>
+            <span class="start button-box">Find out more.</span>
         </div>
     </div>
 </div>
+
+<div class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="row">
+            <div class="col-sm-6 text-center">
+                <%= image_tag('/collector.png', width: "41%", height: "auto", class: "mx-auto") %>
+                <p><strong>Register as a Collector</strong></p>
+                <hr class="hr-box">
+                <p>Interested in contributing to a recycling economy?</p>
+               <div class="text-left pl-5">
+                    <i class="fa fa-check-square" style="color:#fe5000;"></i> Own a Hand Truck <br>
+                    <i class="fa fa-check-square" style="color:#fe5000;"></i> Extensive Benefits
+                </div>
+            </div>
+            <div class="col-sm-6 text-center">
+                <%= image_tag('/recycler.png', width: "30%", height: "auto", class: "mx-auto") %>
+                <p><strong>Register as a Recycler</strong></p>
+                <hr class="hr-box">
+                <p>Want to trade cash for trash?</p>
+                <div class="text-left pl-5">
+                    <i class="fa fa-check-square" style="color:#fe5000;"></i> Accept Used Items <br>
+                    <i class="fa fa-check-square" style="color:#fe5000;"></i> Good Rates <br>
+                    <i class="fa fa-check-square" style="color:#fe5000;"></i> Doorstep Collection
+                </div>
+            </div>
+        </div>
+        <%= link_to "Start Recycling", new_user_registration_path, class: "button-start mx-auto mt-4 mb-0" %>
+    </div>
+</div>
+
+<script>
+    var button = document.querySelector('.button-box');
+    button.addEventListener("click", function(e) {
+      document.querySelector(".modal").style.display = "block";
+
+      //when 'x' is clicked, modal box disappears
+      let modalBox = document.querySelector(".modal");
+      let span = document.querySelector(".close");
+
+          span.onclick = function() {
+            modalBox.style.display = "none";
+          }
+    });
+</script>
