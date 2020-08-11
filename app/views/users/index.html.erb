@@ -23,30 +23,8 @@
     </div>
   </div>
 
-<% @lists.in_groups_of(4, false).each do |group| %>
-     <div class="row">
-     <% group.each do |list| %>
-    <div class="col-md-3 col-md-offset-2 border">
-        <p>Place: <%= list.address %><p>
-        <p>Place: <%= list.pickUpDate %><p>
-        <% sum = 0 %>
-        <% list.types.each do |ele| %>
-            <% sum = sum + ele.weight %>
-        <% end %>
-        <p>Weight: <%= sum %> KG</p>
-
-        <% if list.status === 0 %>
-            <p>Status: Open</p>
-        <% elsif list.status === 1 %>
-            <p>Status: Assigned</p>
-        <% else %>
-            <p>Status: Completed</p>
-        <% end %>
-        <p><%= link_to "Show more", list_path(list) %></p>
-    </div>
-<% end %> 
-</div>
-<% end %>
+ <div class="col">
+<%= render "lists/list_summary" %> 
 
 <% if @lists.length === 0 %>
     <p>There are no lists.</p>

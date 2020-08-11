@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   patch "/list/:id/assign", to: "lists#assign", as: :assign_list
   patch "/list/:id/complete", to: "lists#complete", as: :complete_list
 
+  # for admin actions
+  patch "/users/:id/role", to: "users#updateRole"
+  
+ resources :types
+  
   root 'intro#index'
 
 end

@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:index]
-
   def index # landing page when users login, => shows all the lists
     if (current_user.role === 0) # user is a collector
       @lists = List.where(status: 0)
@@ -27,6 +26,7 @@ class UsersController < ApplicationController
       lists = User.find(@user.id).lists
     else # this person is an admin, just display everything
       lists = List.all
+      @users = User.all
     end 
 
     # we filter the lists to completed and in_progress
@@ -34,8 +34,8 @@ class UsersController < ApplicationController
       if list.status === 1 || list.status === 0 then @in_progress << list
       else @completed << list
       end 
-    end 
 
+    end 
   end 
 
   def new
@@ -45,6 +45,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
+  end
+
+  def updateRole
+    user = User.find(params[:id])
+    user.role = params[:role]
+    user.save
+
   end
 
   private
