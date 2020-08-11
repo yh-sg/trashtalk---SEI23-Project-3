@@ -1,4 +1,12 @@
 class List < ApplicationRecord
+  attr_accessor :travel_distance, :travel_time
+  geocoded_by :address
+  after_validation :geocode
+
+  def full_address
+    return [address, "Singapore", "Singapore"].compact.join(', ')
+  end 
+
   validates :address, :presence => true,
   :length => { :minimum => 5 }
   validates :pickUpDate, :presence => true
@@ -14,4 +22,5 @@ class List < ApplicationRecord
       errors.add(:pickUpDate, "can't be in the past")
     end
   end  
+
 end
