@@ -32,7 +32,11 @@
     <div>
         <p>Place: <%= list.address %><p>
         <p>Place: <%= list.pickUpDate %><p>
-        <p>Distance from you: <%= list.distance %>km</p>
+        <p>Distance from you <%= list.travel_distance %></p>
+        <% if current_user.role === "user" %>
+            <p> Approximately: <%= list.travel_time %></p>
+        <% end %>
+
         <% sum = 0 %>
         <% list.types.each do |ele| %>
             <% sum = sum + ele.weight %>

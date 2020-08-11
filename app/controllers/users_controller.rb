@@ -2,26 +2,37 @@ require 'net/http'
 require "uri"
 
 class UsersController < ApplicationController
+
   before_action :authenticate_user!
   before_action :set_user, only: [:index]
 
   def index # landing page when users login, => shows all the lists
     if (current_user.role === "user") # user is a collector
 
-      # show lists with accordance to distance whereby status is either open or assigned
-      @lists = List.near(current_user.address, 999999, order: 'distance', units: :km)
-      
+      # show lists with accordance to distance whereby status is either open or assigned i.e. not completed
+      @lists = List.near(current_user.address, 999999, order: 'distance', units: :km).where("STATUS != 2")
 
-      # I want to get all the List relative to distance from the current user
       @lists.each do |li|
-        get_travel_time(li.latitude, li.longitude)
+        # details = get_travel_time(li.latitude, li.longitude)
+        li.travel_distance = "10"
+        li.travel_time = "20"
       end 
+
+      # respond_to do |format|
+      #   format.html # index.html.erb
+      #   format.xml  { render :xml => @lists}
+      # end 
     else 
       # if the user is an admin/ regular user, just show all lists
       @lists = List.near(current_user.address, 999999, order: 'distance', units: :km)
 
       @lists.each do |li|
-        puts get_travel_time(li.latitude, li.longitude)
+        def li.travel_distance
+          "10"
+        end 
+        def li.travel_duration
+          "100"
+        end 
       end 
     end
   end
@@ -70,7 +81,7 @@ class UsersController < ApplicationController
     http.use_ssl = true
     req = Net::HTTP::Get.new(uri.request_uri)
     response = http.request(req)
-    return response.body
+    return JSON.parse(response.body)["rows"][0]["elements"][0]
   end 
 
 end

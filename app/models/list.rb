@@ -1,4 +1,5 @@
 class List < ApplicationRecord
+  attr_accessor :travel_distance, :travel_time
   geocoded_by :address
   after_validation :geocode
 
