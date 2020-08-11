@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if (current_user.role === "user") # user is a collector
 
       # show lists with accordance to distance whereby status is either open or assigned i.e. not completed
-      @lists = List.near(current_user.address, 999999, order: 'distance', units: :km).where("STATUS != 2")
+      @lists = List.near(current_user.address, 999999, order: 'distance', units: :km).where("STATUS=0")
 
       # for each list, we add new attributes of distance travelled and traveling time
       @lists.each do |li|
