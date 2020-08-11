@@ -1,0 +1,61 @@
+
+class RoomChannel < ApplicationCable::Channel
+    # calls when a client connects to the server
+    def subscribed
+    #   if params[:room_id].present?
+        # creates a private chat room with a unique name
+        msg = Message.all
+        stream_for msg
+    #   end
+    end
+
+    def someAction(data)
+        puts "this get activated"
+    end
+
+    
+    # calls when a client broadcasts data
+    def speak(data)
+        puts "speaking"
+      sender    = current_user
+      target_user   = User.find_by(username: data['target_user'])
+      message   = data['message']
+      msg = Message.new
+      msg.content = data['message']
+      msg.save!
+
+    #   convo = get_convo(sender,target_user)
+    #   puts "convo"
+    #   puts convo
+    #   puts convo.users
+
+        #  byebug
+        #  convo.save!
+        # user2 = User.find(username: "collector")
+        # byebug
+    #   raise 'No room_id!' if room_id.blank?
+    #   convo = get_convo(room_id) # A conversation is a room
+    #   raise 'No conversation found!' if convo.blank?
+    #   raise 'No message!' if message.blank?
+  
+    #   # adds the message sender to the conversation if not already included
+    #   convo.users << sender unless convo.users.include?(sender)
+    #   # saves the message and its data to the DB
+    #   # Note: this does not broadcast to the clients yet!
+    #   Message.create!(
+    #     conversation: convo,
+    #     sender: sender,
+    #     content: message
+    #   )
+    end
+    
+    # Helpers
+    
+    def get_convo(sender,target_user)
+        convos = Conversation.includes(:users).where(users: {id: 2})
+        puts "hererere"
+        convo = convos.find {|c| puts c.users}
+        # return convo[0]
+    end
+    
+  end

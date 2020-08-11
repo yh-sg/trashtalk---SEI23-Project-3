@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 2020_08_12_032616) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "conversations_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "conversation_id", null: false
+    t.index ["user_id", "conversation_id"], name: "index_conversations_users_on_user_id_and_conversation_id"
+  end
+
   create_table "lists", force: :cascade do |t|
     t.integer "status"
     t.string "remarks"
@@ -49,6 +60,12 @@ ActiveRecord::Schema.define(version: 2020_08_12_032616) do
     t.float "longitude"
     t.time "timeslot"
     t.index ["user_id"], name: "index_lists_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "types", force: :cascade do |t|
