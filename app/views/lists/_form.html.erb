@@ -7,6 +7,7 @@
     <% end %>
 <% end %>
 
+<div class="container" >
 <%= form_for @list do |f| %>
     <div>
         <%= f.label :address %>
@@ -23,11 +24,23 @@
         <%= f.text_field :remarks %>
     </div>
 
+    <hr>
     <h3>Items</h3>
-    <button id="addItemToList"> Add new item</button>
-    <div class="TypesContainer" ></div>
 
-    <div><%= f.submit %></div>
+    <button class="btn btn-outline-secondary mb-3" id="addItemToList"> Add new item</button>
+
+    <% if @list.types.length != 0 %>
+    <%# If this is an edit list %>
+        <% @list.types.each do |type| %>
+            <%= content_tag :div, class: "TypesContainer", data: { types: type } do %>
+            <% end %>
+        <% end %>
+    <% else %>
+        <div class="TypesContainer"></div>
+    <% end %>
+
+    <div id="submitBtn"><%= f.submit class: 'btn btn-outline-success'%></div>
 
     <%= javascript_pack_tag 'addTypeToList' %>
 <% end %>
+</div>
