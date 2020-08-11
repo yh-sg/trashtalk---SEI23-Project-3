@@ -1,33 +1,34 @@
-<div class="container mt-3" style="height: 100vh;">
+<div class="container mt-3">
 <h1>Dashboard</h1>
 
  <div class="row">
-    <div class="col-4">
+    <div class="col-3">
 <% if @user.user_image.attached? %>
     <%= image_tag @user.user_image , width: "200px", height: "200px" %>
 <% else %>
-    <img class="border border" src="https://files.gabbart.com/lib/common/ProfileImg.png">
+    <img class="border border" src="https://files.gabbart.com/lib/common/ProfileImg.png" width="200" height="200">
 <% end %>
 
 <p> Username: <%= @user.username %></p>
-<% if current_user.role != "user" && current_user.id === @user.id %>
+<% if current_user.role != "user" %>
     <%= link_to "Create new lists", new_list_path , :class => 'btn btn-outline-success'%> <br>
     <%= link_to "My lists", home_path(current_user.id) , :class => 'btn btn-outline-info mt-2' %>
 <% end %>
 
-<% if current_user.role != "recycler" && current_user.id === @user.id %>
-    <%= link_to "My lists", home_path(current_user.id) , :class => 'btn btn-outline-info' %>
+<% if current_user.role != "recycler" && current_user.role != "admin" %>
+    <%= link_to "Browse lists", home_path(current_user.id) , :class => 'btn btn-outline-info' %>
 <% end %>
 </div>
 
- <div class="col">
+ 
 
  <% if current_user.role != "admin" %>
+ <div class="col">
  <%= render partial: 'lists_display', locals: {title: "Existing lists/ inprogress", lists:@in_progress} %>
  <%= render partial: 'lists_display', locals: {title: "Completed lists", lists:@completed} %>
-
+</div>
 <% else %>
-
+<div class="col-4">
 <a class="button default ok" href="#users-information" data-toggle="collapse" aria-expanded="false">
    <h2>
        View Users   
@@ -36,7 +37,9 @@
 <div id="users-information" class="collapse">
  <%= render partial: 'users_display', locals: {users:@users} %>
 </div>
+</div>
 
+<div class="col-5">
 <a class="button default ok" href="#lists-information" data-toggle="collapse" aria-expanded="false">
    <h2>
        View Lists   
@@ -46,8 +49,8 @@
  <%= render partial: 'lists_display', locals: {title: "Existing lists/ inprogress", lists:@in_progress} %>
  <%= render partial: 'lists_display', locals: {title: "Completed lists", lists:@completed} %>
 </div>
-
- <% end %>
 </div>
+ <% end %>
+
 </div>
 </div>
