@@ -12,16 +12,12 @@ class UsersController < ApplicationController
       # show lists with accordance to distance whereby status is either open or assigned i.e. not completed
       @lists = List.near(current_user.address, 999999, order: 'distance', units: :km).where("STATUS != 2")
 
+      # for each list, we add new attributes of distance travelled and traveling time
       @lists.each do |li|
-        # details = get_travel_time(li.latitude, li.longitude)
-        li.travel_distance = "10"
-        li.travel_time = "20"
+        details = get_travel_time(li.latitude, li.longitude)
+        li.travel_distance = details["distance"]["text"]
+        li.travel_time = details["duration"]["text"]
       end 
-
-      # respond_to do |format|
-      #   format.html # index.html.erb
-      #   format.xml  { render :xml => @lists}
-      # end 
     else 
       # if the user is an admin/ regular user, just show all lists
       @lists = List.near(current_user.address, 999999, order: 'distance', units: :km)
