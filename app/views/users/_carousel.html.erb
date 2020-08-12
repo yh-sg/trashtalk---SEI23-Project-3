@@ -22,16 +22,18 @@
         </ul>
       </div>
     
+      <% if lists.length > 3 %>
       <div class="glide__arrows" data-glide-el="controls">
         <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
-        </div>
+      </div>
+      <% end %>
     </div>
     <% end %>
 
 <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
 <script>
-    const config = {
-        type: 'carousel',
+    const settings = {
+        type: 'slider',
         startAt: 0,
         perView: 3,
         breakpoints: {
@@ -39,5 +41,5 @@
             700: { perView: 1 }
         }
     }
-    new Glide('.glide', config).mount()
+    new Glide('.glide', settings).mount()
 </script>
