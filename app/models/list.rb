@@ -3,12 +3,8 @@ class List < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
 
-  def full_address
-    return [address, "Singapore", "Singapore"].compact.join(', ')
-  end 
-
   validates :address, :presence => true,
-  :length => { :minimum => 5 }
+  :length => { :minimum => 10 }
   validates :pickUpDate, :presence => true
 
   validate :pickupdate_cannot_be_in_the_past

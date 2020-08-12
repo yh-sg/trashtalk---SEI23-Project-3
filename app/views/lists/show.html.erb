@@ -9,6 +9,7 @@
 </p>
 <p>Pick up address: <%= @list.address %></p>
 <p>Pick up date: <%= @list.pickUpDate.to_s %></p>
+<p>Pick up time: <%= @list.timeslot.strftime('%H:%M %p') %></p>
 <p>Created at: <%= @list.created_at.to_date %>, <%= time_ago_in_words(@list.created_at) %> ago</p>
 <p>Remarks: <%= @list.remarks %></p>
 <% if @list.status === 0 %>
@@ -58,12 +59,12 @@
     <% if @list.status == 0 %>
         This list is open
     <% elsif @list.status == 1 %>
-        This list is assigned to: 
+        Accepted by: 
         <%= link_to user_path(@list.collector) do %>
             <%= @assigned %>
         <% end %>
     <% elsif @list.status == 2 %>
-        This list is completed by: 
+        Completed by: 
         <%= link_to user_path(@list.collector) do %>
             <%= @assigned %>
         <% end %>
@@ -73,13 +74,13 @@
 <%# The user is either admin or collecter and the status is open #%>
 <%  if (current_user.role === "user" || current_user.role === "admin") && (@list.status === 0)  %>
     <%= form_for @list, url: assign_list_path(@list.id) do |f| %>
-        <%= f.submit "Fulfil" ,:class => 'btn btn-outline-info btn-lg'%>
+        <%= f.submit "Accept" ,:class => 'btn btn-outline-info btn-lg'%>
     <% end %>
 <% end %>
 
 <%# Admin/ assigned collector %>
 <% if @list.user.id === current_user.id || current_user.role === "admin" || @list.collector === current_user.id %>
-    <p>This list belongs to you</p> <%# For now.. We display the same message for all %>
+    <p>Belongs to you</p> <%# For now.. We display the same message for all %>
 
     <%# This list belongs to the collector and the list is in progress %>
     <% if current_user.role === "user" && @list.status === 1 %>
@@ -97,7 +98,7 @@
 <% end %>   
 
 <%# Owner can only edit when the list is open or assigned i.e. not completed %>
-<% if current_user.id === @list.user.id && (@list.status === 0 || @list.status === 1) || current_user.role === "admin" %>
+<% if current_user.id === @list.user.id && (@list.status === 0) || current_user.role === "admin" %>
     <%= link_to "Edit", edit_list_path(@list) ,:class => 'btn btn-outline-info'%>
 <% end %>
 
