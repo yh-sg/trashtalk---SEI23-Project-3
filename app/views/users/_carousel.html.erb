@@ -1,5 +1,5 @@
 <div class="container">
-    <h3><%= title %> (<%= lists.length%>)</h3>
+    <h3 class="mb-3"><%= title %> (<%= lists.length%>)</h3>
 
     <% if lists.length > 0 %>
     <div class="glide">
@@ -9,13 +9,13 @@
             <li class="glide__slide card">
                 <div class="card-body" style="width:200px">
                     <% if li.status === 0 %>
-                        <span class="badge pill badge-scs">Open</span>
+                        <span class="badge pill badge-op">Open</span>
                     <% elsif li.status === 1 %>
                         <span class="badge badge-inf">Assigned</span>
                     <% else %>
-                        <span class="badge badge-secondary">Completed</span>
+                        <span class="badge badge-scs">Completed</span>
                     <% end %>
-                    <p>Pickup #<%= li.id %></p>
+                    <p class="pt-3">Pickup #100<%= li.id %></p>
                     <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info mb-3' %>
                 </div>
             </li>
