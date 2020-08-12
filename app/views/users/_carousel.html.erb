@@ -32,13 +32,19 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
 <script>
-    new Glide('.glide', {
-            type: 'slider',
-            startAt: 0,
-            perView: 3,
-            breakpoints: {
-                1024: { perView: 2 },
-                700: { perView: 1 }
-            }
-    }).mount()
+    var sliders = document.querySelectorAll('.glide');
+
+    for (var i = 0; i < sliders.length; i++) {
+    var glide = new Glide(sliders[i], {
+        type: 'slider',
+        startAt: 0,
+        perView: 3,
+        breakpoints: {
+            1024: { perView: 2 },
+            700: { perView: 1 }
+        }
+    });
+    
+        glide.mount();
+    }
 </script>
