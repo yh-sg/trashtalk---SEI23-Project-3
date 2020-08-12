@@ -8,13 +8,13 @@ consumer.subscriptions.create(
 
       const chatInputEl = document.getElementById("chatInput");
 
-      chatInputEl.addEventListener("keypress",(e)=>{
-        if (e.code == "Enter"){
-          console.log("this",e.target.value)
+      chatInputEl.addEventListener("keypress", (e) => {
+        if (e.code == "Enter") {
+          console.log("this", e.target.value);
           this.speak(e.target.value);
+          this.received(e.target.value)
         }
-      })
-
+      });
     },
 
     disconnected() {
@@ -25,14 +25,14 @@ consumer.subscriptions.create(
 
     received(data) {
       // Called when there's incoming data on the websocket for this channel
-      console.log("received");
+      console.log("received")
+      $("#messages").append(data);
+      console.log(data);
     },
 
     speak: function (data) {
-      console.log("speak,",data)
+      console.log("speak,", data);
       return this.perform("speak", { message: data, target_user: "recycler" });
     },
   }
 );
-
-

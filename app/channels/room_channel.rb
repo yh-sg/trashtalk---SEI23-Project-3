@@ -5,13 +5,12 @@ class RoomChannel < ApplicationCable::Channel
     #   if params[:room_id].present?
         # creates a private chat room with a unique name
         msg = Message.all
-        stream_for msg
+        #stream_for msg
+        stream_from msg
     #   end
     end
 
-    def someAction(data)
-        puts "this get activated"
-    end
+
 
     
     # calls when a client broadcasts data
@@ -22,7 +21,9 @@ class RoomChannel < ApplicationCable::Channel
     #   target_user   = User.find_by(username: data['target_user'])
       message   = data['message']
       msg = Message.new
+      msg.user_id = current_user.id 
       msg.content = data['message']
+      puts msg
       msg.save!
       ActionCable.server.broadcast "RoomChannel", message: message
     #   convo = get_convo(sender,target_user)
