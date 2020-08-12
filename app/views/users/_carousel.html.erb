@@ -1,21 +1,20 @@
-<div class="container">
-    <h3 class="mb-3"><%= title %> (<%= lists.length%>)</h3>
+    <h3><%= title %> (<%= lists.length%>)</h3>
 
     <% if lists.length > 0 %>
     <div class="glide">
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
           <% lists.each do |li| %>
-            <li class="glide__slide card">
-                <div class="card-body" style="width:200px">
+            <li class="glide__slide">
+                <div style="width: 200px;">
                     <% if li.status === 0 %>
-                        <span class="badge pill badge-op">Open</span>
+                        <span class="badge badge-success">Open</span>
                     <% elsif li.status === 1 %>
-                        <span class="badge badge-inf">Assigned</span>
+                        <span class="badge badge-info">Assigned</span>
                     <% else %>
-                        <span class="badge badge-scs">Completed</span>
+                        <span class="badge badge-secondary">Completed</span>
                     <% end %>
-                    <p class="pt-3">Pickup #100<%= li.id %></p>
+                    <p><%= li.address %></p>
                     <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info mb-3' %>
                 </div>
             </li>
@@ -23,12 +22,13 @@
         </ul>
       </div>
     
-        <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--right" data-glide-dir=">" style="font-size:18px;">></button>
-        </div>
+      <% if lists.length > 3 %>
+      <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+      </div>
+      <% end %>
     </div>
     <% end %>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
 <script>
