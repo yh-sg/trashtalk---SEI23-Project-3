@@ -1,25 +1,38 @@
-import consumer from "./consumer"
+import consumer from "./consumer.js";
 
-consumer.subscriptions.create({ channel: "RoomChannel", room: "RoomChannel" }, {
-  connected() {
-    console.log("connected")
-    // Called when the subscription is ready for use on the server
-    this.speak("something")
-  },
+consumer.subscriptions.create(
+  { channel: "RoomChannel", room: "RoomChannel" },
+  {
+    connected() {
+      console.log("connected");
 
-  disconnected() {
-    console.log("disconnected")
+      const chatInputEl = document.getElementById("chatInput");
 
-    // Called when the subscription has been terminated by the server
-  },
+      chatInputEl.addEventListener("keypress",(e)=>{
+        if (e.code == "Enter"){
+          console.log("this",e.target.value)
+          this.speak(e.target.value);
+        }
+      })
 
-  received(data) {
-    // Called when there's incoming data on the websocket for this channel
-    console.log("received")
+    },
 
-  },
+    disconnected() {
+      console.log("disconnected");
 
-  speak: function(data) {
-    return this.perform('speak',{message:data, target_user:"recycler"});
+      // Called when the subscription has been terminated by the server
+    },
+
+    received(data) {
+      // Called when there's incoming data on the websocket for this channel
+      console.log("received");
+    },
+
+    speak: function (data) {
+      console.log("speak,",data)
+      return this.perform("speak", { message: data, target_user: "recycler" });
+    },
   }
-});
+);
+
+

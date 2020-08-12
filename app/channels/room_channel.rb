@@ -17,13 +17,14 @@ class RoomChannel < ApplicationCable::Channel
     # calls when a client broadcasts data
     def speak(data)
         puts "speaking"
-      sender    = current_user
-      target_user   = User.find_by(username: data['target_user'])
+        puts data
+      sender = current_user
+    #   target_user   = User.find_by(username: data['target_user'])
       message   = data['message']
       msg = Message.new
       msg.content = data['message']
       msg.save!
-
+      ActionCable.server.broadcast "RoomChannel", message: message
     #   convo = get_convo(sender,target_user)
     #   puts "convo"
     #   puts convo
