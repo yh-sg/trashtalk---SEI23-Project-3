@@ -7,7 +7,7 @@
 <% if @user.user_image.attached? %>
     <%= image_tag @user.user_image , width: "200px", height: "200px" %>
 <% else %>
-    <img class="border border" src="https://files.gabbart.com/lib/common/ProfileImg.png" width="200" height="200">
+    <%= image_tag('/profile_pic.jpg', width: "200px", height: "200px") %>
 <% end %>
 
 <p> Username: <%= @user.username %></p>

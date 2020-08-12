@@ -9,7 +9,9 @@
 </p>
 <p>Pick up address: <%= @list.address %></p>
 <p>Pick up date: <%= @list.pickUpDate.to_s %></p>
-<p>Pick up time: <%= @list.timeslot.strftime('%H:%M %p') %></p>
+<% if @list.timeslot != nil %>
+    <p>Pick up time: <%= @list.timeslot.strftime('%H:%M %p') %></p>
+<% end %>
 <p>Created at: <%= @list.created_at.to_date %>, <%= time_ago_in_words(@list.created_at) %> ago</p>
 <p>Remarks: <%= @list.remarks %></p>
 <% if @list.status === 0 %>
