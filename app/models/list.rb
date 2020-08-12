@@ -22,8 +22,8 @@ class List < ApplicationRecord
   end  
 
   def timeslot_cannot_be_in_the_past
-    if timeslot.present? && timeslot < Time.now
-      errors.add(:timeslot, "can't be in the past")
+    if pickUpDate.present? && pickUpDate == Date.today && timeslot.present? && timeslot.utc.strftime( "%H%M%S%N" ) < Time.now.utc.strftime( "%H%M%S%N" )
+      errors.add(:timeslot, "#{Time.now} #{timeslot}" )
     end
   end 
 
