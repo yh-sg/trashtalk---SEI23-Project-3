@@ -4,7 +4,9 @@
 <p><%= render_shareable %></p>
 <p>Belongs to: 
     <%= link_to user_path(@list.user) do %>
+    <span class="badge pill badge-user mr-3">
         <%= @list.user.username %>
+        </span>
     <% end %>
 </p>
 <p>Pick up address: <%= @list.address %></p>
@@ -33,8 +35,8 @@
 
 <h3>Items in this list </h3>
 
-<table class="table">
-  <thead class="thead-light">
+<table class="table table-bordered">
+  <thead class="thead-dark">
     <tr>
       <th scope="col">No.</th>
       <th scope="col">Material</th>
@@ -44,7 +46,7 @@
   </thead>
   <tbody>
     <% @list.types.each_with_index do |type, idx|%>
-        <tr>
+        <tr class="table-primary">
             <th scope="row"><%= idx + 1 %></th>
             <td><%= type.material %></td>
             <td><%= type.remarks %></td>

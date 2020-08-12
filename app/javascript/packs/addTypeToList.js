@@ -15,7 +15,7 @@ $('.TypesContainer').each(function(){
 const addItemButton = document.querySelector("#addItemToList");
 let listItemIdx = 0;
 
-const materials = ["Metal","Glass","Plastic"]
+const materials = ["Metal","Glass","Plastic","Paper","Cardboard"]
 
 
 const generateDomElement = (type, className = null) => {
