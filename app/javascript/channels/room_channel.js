@@ -25,9 +25,10 @@ consumer.subscriptions.create(
 
     received(data) {
       // Called when there's incoming data on the websocket for this channel
-      console.log("received")
-      $("#messages").append(data);
       console.log(data);
+      $("#messages").append(data['message']);
+
+      // alert("hello")
     },
 
     speak: function (data) {
@@ -36,3 +37,6 @@ consumer.subscriptions.create(
     },
   }
 );
+
+
+

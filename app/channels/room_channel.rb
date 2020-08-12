@@ -4,9 +4,9 @@ class RoomChannel < ApplicationCable::Channel
     def subscribed
     #   if params[:room_id].present?
         # creates a private chat room with a unique name
-        msg = Message.all
+        # msg = Message.all
         #stream_for msg
-        stream_from msg
+        stream_from "RoomChannel"
     #   end
     end
 
