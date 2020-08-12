@@ -28,14 +28,6 @@
 <div class="my-2">
 <%= render partial: 'carousel', locals:  {title: "Completed Lists", lists:@completed} %>
 </div>
-
- 
-
- <% if current_user.role != "admin" %>
- <div class="col-9">
- <%= render partial: 'carousel', locals: {title: "Existing lists/ inprogress", lists:@in_progress} %>
- <%= render partial: 'carousel', locals: {title: "Completed lists", lists:@completed} %>
-
  <%#= render partial: 'lists_display', locals: {title: "Existing lists/ inprogress", lists:@in_progress} %>
  <%#= render partial: 'lists_display', locals: {title: "Completed lists", lists:@completed} %>
 </div>
