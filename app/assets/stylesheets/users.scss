@@ -19,3 +19,17 @@
     display: flex;
     flex-direction: row;
 }
+
+.profile {
+    background: white;
+    max-width: 240px;
+    padding: 30px;
+    -webkit-box-shadow: 9px 9px 24px 6px rgba(0,0,0,0.11);
+    -moz-box-shadow: 9px 9px 24px 6px rgba(0,0,0,0.11);
+    box-shadow: 9px 9px 24px 6px rgba(0,0,0,0.11)
+}
+
+.dashboard {
+    font-family: 'Mulish', sans-serif;
+    font-weight: 600;
+}

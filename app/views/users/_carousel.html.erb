@@ -1,3 +1,4 @@
+<div class="container">
     <h3><%= title %> (<%= lists.length%>)</h3>
 
     <% if lists.length > 0 %>
@@ -14,7 +15,7 @@
                     <% else %>
                         <span class="badge badge-secondary">Completed</span>
                     <% end %>
-                    <p><%= li.address %></p>
+                    <p>Pickup #<%= li.id %></p>
                     <%= link_to "Show more", list_path(li), :class => 'btn btn-outline-info mb-3' %>
                 </div>
             </li>
@@ -27,6 +28,7 @@
         </div>
     </div>
     <% end %>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
 <script>
