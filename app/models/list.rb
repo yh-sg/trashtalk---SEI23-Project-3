@@ -7,6 +7,8 @@ class List < ApplicationRecord
   :length => { :minimum => 10 }
   validates :pickUpDate, :presence => true
 
+  validate :timeslot_cannot_be_in_the_past
+
   validate :pickupdate_cannot_be_in_the_past
 
   belongs_to :user
@@ -18,5 +20,11 @@ class List < ApplicationRecord
       errors.add(:pickUpDate, "can't be in the past")
     end
   end  
+
+  def timeslot_cannot_be_in_the_past
+    if timeslot.present? && timeslot < Time.now
+      errors.add(:timeslot, "can't be in the past")
+    end
+  end 
 
 end
