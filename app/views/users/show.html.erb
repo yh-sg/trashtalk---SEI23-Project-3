@@ -23,9 +23,12 @@
  
 
  <% if current_user.role != "admin" %>
- <div class="col">
- <%= render partial: 'lists_display', locals: {title: "Existing lists/ inprogress", lists:@in_progress} %>
- <%= render partial: 'lists_display', locals: {title: "Completed lists", lists:@completed} %>
+ <div class="col-9">
+ <%= render partial: 'carousel', locals: {title: "Existing lists/ inprogress", lists:@in_progress} %>
+ <%= render partial: 'carousel', locals: {title: "Completed lists", lists:@completed} %>
+
+ <%#= render partial: 'lists_display', locals: {title: "Existing lists/ inprogress", lists:@in_progress} %>
+ <%#= render partial: 'lists_display', locals: {title: "Completed lists", lists:@completed} %>
 </div>
 <% else %>
 <div class="col-4">
