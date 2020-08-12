@@ -8,6 +8,8 @@ class RoomChannel < ApplicationCable::Channel
         #stream_for msg
         stream_from "RoomChannel"
     #   end
+
+
     end
 
 
@@ -22,10 +24,11 @@ class RoomChannel < ApplicationCable::Channel
       message   = data['message']
       msg = Message.new
       msg.user_id = current_user.id 
+      msg.recipient_id = data["target_user"]
       msg.content = data['message']
       puts msg
       msg.save!
-      ActionCable.server.broadcast "RoomChannel", message: message
+      ActionCable.server.broadcast "RoomChannel", {message: message, sender: current_user, recipient: User.find(data["target_user"])}
     #   convo = get_convo(sender,target_user)
     #   puts "convo"
     #   puts convo

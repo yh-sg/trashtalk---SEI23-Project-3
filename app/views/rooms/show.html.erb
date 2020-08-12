@@ -1,0 +1,17 @@
+<h1>Rooms#show</h1>
+<p>Find me in app/views/rooms/show.html.erb</p>
+<div id="messages">
+Messages
+<form id="msgSent">
+</form>
+<% @messages.each do |msg|%>
+<div>
+<%=msg.user_id%>
+<%=msg.content%>
+</div>
+<%end%>
+</div>
+
+<input id="chatInput" data-recipient-id="<%= @recipient_id %>" /> 
+
+    <%= javascript_pack_tag 'chatScript' %>
