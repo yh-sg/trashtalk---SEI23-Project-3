@@ -82,7 +82,7 @@ class ListsController < ApplicationController
   private
   
   def list_params
-    params.require(:list).permit(:address, :pickUpDate, :remarks, types_attributes: [:material, :remarks, :weight])
+    params.require(:list).permit(:address, :pickUpDate, :remarks, :timeslot ,types_attributes: [:material, :remarks, :weight])
   end
 
 end
