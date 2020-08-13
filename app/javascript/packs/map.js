@@ -10,7 +10,7 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
                 "width":  32,  
                 "height": 32  
             },
-            "infowindow": li.address  
+            "infowindow": li.address
             }  
         ]);  
         handler.bounds.extendWith(markers);  

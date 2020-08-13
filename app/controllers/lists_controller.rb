@@ -15,8 +15,10 @@ class ListsController < ApplicationController
     @list.user = current_user
 
     if @list.save
+      flash[:notice] = "List successfully created!🎉"
       redirect_to user_path(current_user.id)
     else 
+      flash[:alert] = "Uh oh! Something went wrong, please try again later 😔"
       render :new
     end 
   end 
@@ -35,6 +37,7 @@ class ListsController < ApplicationController
 
     # rebuild everything
     if @list.update(list_params)
+      flash[:notice] = "List successfully updated!🎉"
       redirect_to list_path(@list)
     else 
       render :edit
@@ -55,7 +58,10 @@ class ListsController < ApplicationController
     list.collector = current_user.id
     list.update(status: 1) # 0 - unfulfilled, 1 - doing, 2 - done
     if list.save 
+      flash[:notice] = "List successfully assigned!🎉"
       redirect_to user_path(current_user.id)
+    else 
+      flash[:alert] = "Uh oh! Something went wrong, please try again later 😔"
     end
   end 
 
@@ -63,6 +69,7 @@ class ListsController < ApplicationController
     list = List.find(params[:id])
     list.update(status: 2) 
     if list.save 
+      flash[:notice] = "Thank you for saving Mother Earth! You deserve a trophy!🏆"
       redirect_to user_path(current_user.id)
     end 
   end 
@@ -75,8 +82,11 @@ class ListsController < ApplicationController
 
     # delete the lists
     if List.find(params[:id]).destroy
+      flash[:notice] = "List successfully deleted."
       redirect_to user_path(current_user.id)
-    end
+    else 
+      flash[:alert] = "Uh oh! Something went wrong, please try again later 😔"
+    end 
   end 
 
   private
