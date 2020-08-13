@@ -15,8 +15,14 @@
 
             <div class="mx-auto">
                 <p class="card-text"><%= list.address %><p>
+<<<<<<< HEAD
                 <p>Posted: <%= time_tag(list.created_at) %></p>
                 <p><%= list.travel_distance %> away from you</p>
+=======
+                <p>Date: <%= list.pickUpDate %><p>
+                <p>Time: <%= list.timeslot.strftime('%H:%M %p') %></p>
+                <p>Distance: <%= list.travel_distance %></p>
+>>>>>>> lists-layout
                 <% if current_user.role === "user" %>
                     <p>Approximately: <%= list.travel_time %></p>
                 <% end %>
