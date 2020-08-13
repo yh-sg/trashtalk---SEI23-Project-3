@@ -24,7 +24,7 @@ An app that is designed to support and sustain a circular economy by connecting 
 | Admin<br>Recycler<br>Collector | Pick up Date<br>Status | Material Type<br>Weight<br>Remarks |
 
 #### ERD
-<img src="wireframes/erd.png" width="600">
+<img width="768" alt="Screenshot 2020-08-13 at 9 25 31 PM" src="https://user-images.githubusercontent.com/61861009/90139952-a07e4f80-ddab-11ea-88c9-0f0ba662e8a0.png">
 
 ### Furthers
 * Geolocation
