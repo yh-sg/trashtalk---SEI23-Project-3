@@ -2,33 +2,42 @@
      <div class="row mb-2">
      <% group.each do |list| %>
 
-    <div class="col-md-3 col-md-offset-2 border p-3 mt-1">
-        <% if list.status === 0 %>
-            <p class="float-right badge badge-success">Open</p>
-        <% elsif list.status === 1 %>
-            <p class="float-right badge badge-info">Assigned</p>
-        <% else %>
-            <p class="float-right badge badge-secondary">Completed</p>
-        <% end %>
+    <div class="col-md-3 col-md-offset-2 p-3 mt-1">
+        <div class="card">
+            <div class="card-body">
+            <% if list.status === 0 %>
+                <p class="badge badge-op">Open</p>
+            <% elsif list.status === 1 %>
+                <p class="badge badge-inf">Assigned</p>
+            <% else %>
+                <p class="badge badge-scs">Completed</p>
+            <% end %>
 
-        <div style="margin-top: auto; margin-bottom: auto;" class="mx-auto">
-            <p><%= list.address %><p>
-            <p>Date: <%= list.pickUpDate %><p>
-            <p>Time: <%= list.timeslot.strftime('%H:%M %p') %></p>
-            <p>Distance: <%= list.travel_distance %></p>
-            <% if current_user.role === "user" %>
-                <p>Approximately: <%= list.travel_time %></p>
-            <% end %>
-            <% sum = 0 %>
-            <% list.types.each do |ele| %>
-                <% sum = sum + ele.weight %>
-            <% end %>
-            <p>Weight: <%= sum %> kg</p>
-            <p style="display: block; margin: auto; width: fit-content;">
-            <%= link_to "Show more", list_path(list), :class => 'mx-auto btn btn-outline-info mb-3' %>
-            </p>
+            <div class="mx-auto">
+                <p class="card-text"><%= list.address %><p>
+                <p>Posted: <%= time_tag(list.created_at) %></p>
+                <p><%= list.travel_distance %> away from you</p>
+                <% if current_user.role === "user" %>
+                    <p>Approximately: <%= list.travel_time %></p>
+                <% end %>
+                <% sum = 0 %>
+                <% list.types.each do |ele| %>
+                    <% sum = sum + ele.weight %>
+                <% end %>
+                <p>Weight: <%= sum %> kg</p>
+                <p style="display: block; margin: auto; width: fit-content;">
+                <%= link_to "Show more", list_path(list), :class => 'mx-auto btn btn-outline-info mb-3' %>
+                </p>
+            </div>
+        </div>
         </div>
     </div>
 <% end %> 
 </div>
+<% end %>
+
+<%= javascript_tag do %>
+    $(function() {
+        $("time.timeago").timeago();
+    });
 <% end %>
