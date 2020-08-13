@@ -11,8 +11,8 @@
 
         <p class="mt-3"> Username: <%= @user.username %></p>
         <% if current_user.role != "user" %>
-            <%= link_to "My lists", home_path(current_user.id) , :class => 'btn btn-outline-info' %>
-            <%= link_to "Create new lists", new_list_path , :class => 'btn btn-outline-success'%>
+            <%= link_to "Explore", home_path(current_user.id) , :class => 'btn btn-outline-info' %>
+            <%= link_to "Create new list", new_list_path , :class => 'btn btn-outline-success'%>
         <% end %>
 
         <% if current_user.role != "recycler" && current_user.role != "admin" %>
