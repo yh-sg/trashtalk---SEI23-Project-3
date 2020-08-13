@@ -11,9 +11,7 @@ consumer.subscriptions.create(
         const recipientId = e.target.getAttribute("data-recipient-id");
         const message = e.target.value;
         if (e.code == "Enter") {
-          console.log("this", e.target.value);
-          this.speak(message, recipientId);
-          this.received(e.target.value);
+          this.sendMessage(message, recipientId);
         }
       });
     },
@@ -28,20 +26,27 @@ consumer.subscriptions.create(
       // Called when there's incoming data on the websocket for this channel
       console.log(data);
 
-        $("#messages").append(data["message"]);
+      const messageContainer = document.createElement("div")
+      const contentEl = document.createElement("span")
+      contentEl.innerText = data.message;
+      const usernameEl = document.createElement("span")
+      usernameEl.innerText= data.sender.username + " : ";
 
-      
-    //   else {
-    //     document.querySelector(
-    //       "#notifications"
-    //     ).innerHTML = `<a href="/rooms/show?target_user_id=${data.sender.id}"> ${data.sender.username} have sent you a message. </a>`;
-    //   }
+      messageContainer.appendChild(usernameEl)
+      messageContainer.appendChild(contentEl)
+
+      document.querySelector("#messages").appendChild(messageContainer)
+
+      //   else {
+      //     document.querySelector(
+      //       "#notifications"
+      //     ).innerHTML = `<a href="/rooms/show?target_user_id=${data.sender.id}"> ${data.sender.username} have sent you a message. </a>`;
+      //   }
 
       // alert("hello")
     },
 
-    speak: function (message, recipientId) {
-      console.log("speak,", message, recipientId);
+    sendMessage: function (message, recipientId) {
       return this.perform("speak", {
         message: message,
         target_user: recipientId,

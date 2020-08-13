@@ -2,12 +2,17 @@
 <p>Find me in app/views/rooms/show.html.erb</p>
 <div id="messages">
 Messages
-<form id="msgSent">
-</form>
 <% @messages.each do |msg|%>
 <div>
-<%=msg.user_id%>
+<span>
+<%=msg.user.username%> :
+
+</span>
+
+<span>
 <%=msg.content%>
+
+</span>
 </div>
 <%end%>
 </div>
