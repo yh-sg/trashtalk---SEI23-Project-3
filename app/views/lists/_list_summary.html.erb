@@ -3,7 +3,7 @@
      <% group.each do |list| %>
 
     <div class="col-md-3 col-md-offset-2 p-3 mt-1">
-        <div class="card">
+        <div class="card card-m">
             <div class="card-body">
             <% if list.status === 0 %>
                 <p class="badge badge-op">Open</p>
@@ -13,21 +13,21 @@
                 <p class="badge badge-scs">Completed</p>
             <% end %>
 
-            <div class="mx-auto">
-                <p class="card-text"><%= list.address %><p>
-                <p>Posted: <%= time_tag(list.created_at) %></p>
-                <p><%= list.travel_distance %> away from you</p>
+            <p><strong><%= list.address %></strong><p>
+            <div class="mx-auto card-text">
+                <span><em>Posted on:<br> <%= time_tag(list.created_at) %></em></span><br>
+                <span><%= list.travel_distance %> away from you</span><br>
                 <% if current_user.role === "user" %>
-                    <p>Approximately: <%= list.travel_time %></p>
+                    <span>Approximately: <%= list.travel_time %></span>
                 <% end %>
                 <% sum = 0 %>
                 <% list.types.each do |ele| %>
                     <% sum = sum + ele.weight %>
                 <% end %>
-                <p>Weight: <%= sum %> kg</p>
-                <p style="display: block; margin: auto; width: fit-content;">
-                <%= link_to "Show more", list_path(list), :class => 'mx-auto btn btn-outline-info mb-3' %>
-                </p>
+                <span>Weight: <%= sum %> kg</span>
+                <span style="display: block; margin: auto; width: fit-content;">
+                <%= link_to "Show more", list_path(list), :class => 'mx-auto btn btn-outline-info my-3' %>
+                </span>
             </div>
         </div>
         </div>
