@@ -6,7 +6,7 @@ SEI 23 - Project 3
 #### [Demo](https://github.com/yh-sg/trashtalks/blob/master/presentation.md)
 
 ### Overview
-An app that is designed to support and sustain a circular economy by connecting residents with recycling agents in an effort to reduce waste.
+An app that is designed to support and sustain a circular economy by connecting residents with recycling agents in an effort to reduce waste.\
 https://trash-talks.herokuapp.com/
 
 #### Objectives
