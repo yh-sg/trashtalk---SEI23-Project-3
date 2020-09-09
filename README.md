@@ -7,6 +7,7 @@ SEI 23 - Project 3
 
 ### Overview
 An app that is designed to support and sustain a circular economy by connecting residents with recycling agents in an effort to reduce waste.
+https://trash-talks.herokuapp.com/
 
 #### Objectives
 * Resident should be able to register as Recycler with contact details and create a list with an expected pickup date. The list should contain types of items and a status of fulfilled/unfulfilled/in-progress.
